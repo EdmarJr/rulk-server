@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Rest-ear">
-        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
-        <dependent-module archiveName="Rest-web.war" deploy-path="/" handle="module:/resource/Rest-web/Rest-web">
-            <dependent-object/>
+    <wb-module deploy-name="Rest">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/ear-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/application" tag="defaultRootSource"/>
+        <dependent-module archiveName="Rest-0.0.1.jar" deploy-path="/" handle="module:/resource/Rest/Rest">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="Rest.jar" deploy-path="/" handle="module:/resource/Rest/Rest">
-            <dependent-object/>
+        <dependent-module archiveName="Rest-web-0.0.1.war" deploy-path="/" handle="module:/resource/Rest-web/Rest-web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>
