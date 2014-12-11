@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>br.com.rest</groupId>
-    <artifactId>rest-parent</artifactId>
+    <artifactId>rest</artifactId>
     <version>0.0.1</version>
   </parent>
   <artifactId>Rest-ear</artifactId>
@@ -11,7 +11,7 @@
   <dependencies>
   	<dependency>
   		<groupId>${project.groupId}</groupId>
-  		<artifactId>Rest</artifactId>
+  		<artifactId>Rest-EJB</artifactId>
   		<version>${project.version}</version>
   		<type>ejb</type>
   	</dependency>
@@ -39,7 +39,7 @@
 					<modules>
 						<ejbModule>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>Rest</artifactId>
+							<artifactId>Rest-EJB</artifactId>
 						</ejbModule>
 						<webModule>
 							<groupId>${project.groupId}</groupId>

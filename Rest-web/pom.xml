@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>br.com.rest</groupId>
-    <artifactId>rest-parent</artifactId>
+    <artifactId>rest</artifactId>
     <version>0.0.1</version>
   </parent>
   <artifactId>Rest-web</artifactId>
@@ -41,7 +41,7 @@
 	</dependency>
   	<dependency>
   		<groupId>${project.groupId}</groupId>
-  		<artifactId>Rest</artifactId>
+  		<artifactId>Rest-EJB</artifactId>
   		<version>${project.version}</version>
   	</dependency>
   </dependencies>
