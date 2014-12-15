@@ -1,6 +1,4 @@
-package entitys;
-
-import java.io.Serializable;
+package com.rest.entitys;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,39 +7,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * Entity implementation class for Entity: Usuario
- *
- */
 @Entity
-@Table(name="USUARIO",schema="dbo")
-public class Usuario implements Serializable {
-
-	
-	private static final long serialVersionUID = 1L;
+@Table(name="musculo",schema="dbo")
+public class Musculo {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column
+	@Column(name="id")
 	private Long id;
 	
-	@Column
+	@Column(name="nome")
 	private String nome;
-
+	
+	@Column(name="nome")
+	private String apelido;
+	
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public String getApelido() {
+		return apelido;
+	}
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
 	
 	
