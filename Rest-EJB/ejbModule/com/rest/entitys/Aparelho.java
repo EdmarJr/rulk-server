@@ -33,7 +33,7 @@ public class Aparelho implements ObjetoComExclusaoLogica {
 	@Column(name = "ativo")
 	private Boolean ativo;
 	@ManyToOne
-	@JoinColumn(name="unidade_id",referencedColumnName="unidade_id")
+	@JoinColumn(name="unidade_id",referencedColumnName="id")
 	private Unidade unidade;
 
 	public Long getId() {

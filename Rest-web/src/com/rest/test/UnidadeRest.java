@@ -1,6 +1,7 @@
 package com.rest.test;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.UriInfo;
 import com.rest.business.UnidadeBusiness;
 import com.rest.entitys.Unidade;
 import com.rest.exceptions.BusinessException;
+import com.rest.login.LoginService;
 
 @ApplicationScoped
 @Path(value = "/unidades")
@@ -30,7 +32,15 @@ public class UnidadeRest extends Rest {
 
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
-
+	@Inject
+	private LoginService loginService;
+	
+	@GET
+	public List<Unidade> obterTodos() {
+		return loginService.obterUsuarioLogado().getEmpresa().getUnidades();
+		
+	}
+	
 	@POST
 	public Response incluir(Unidade unidade) {
 		try {
@@ -49,5 +59,6 @@ public class UnidadeRest extends Rest {
 	public Unidade getUnidade(@PathParam("id") Long id) {
 		return unidadeBusiness.obterPorId(id);
 	}
+	
 
 }

@@ -10,20 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
-import com.rest.string.Constantes;
 
 @Entity
 @Table(name = "unidade", schema = "dbo")
 @EntityListeners(AtivoInativoListener.class)
-@NamedQueries({ @NamedQuery(name = Constantes.UNIDADE_BUSCAR_POR_ID, query = "SELECT u FROM Unidade u WHERE u.id = :id") })
 public class Unidade implements ObjetoComExclusaoLogica {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +34,9 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	@ManyToOne
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
 	private Empresa empresa;
+	@OneToOne
+	@JoinColumn(name="responsavel_id",referencedColumnName="email")
+	private Colaborador responsavel;
 	@Column(name = "ativo")
 	private Boolean ativo;
 	@OneToMany(mappedBy = "unidade")
@@ -75,7 +77,7 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-
+	@JsonIgnore
 	public List<Usuario> getClientes() {
 		return clientes;
 	}
@@ -83,7 +85,7 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	public void setClientes(List<Usuario> clientes) {
 		this.clientes = clientes;
 	}
-
+	@JsonIgnore
 	public List<Aparelho> getAparelhos() {
 		return aparelhos;
 	}
@@ -91,13 +93,21 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	public void setAparelhos(List<Aparelho> aparelhos) {
 		this.aparelhos = aparelhos;
 	}
-
+	@JsonIgnore
 	public List<Plano> getPlanosDisponiveis() {
 		return planosDisponiveis;
 	}
 
 	public void setPlanosDisponiveis(List<Plano> planosDisponiveis) {
 		this.planosDisponiveis = planosDisponiveis;
+	}
+
+	public Colaborador getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(Colaborador responsavel) {
+		this.responsavel = responsavel;
 	}
 	
 	

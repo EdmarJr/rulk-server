@@ -5,8 +5,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -16,9 +14,8 @@ import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
 
 @Entity
-@Table
-@Inheritance(strategy = InheritanceType.JOINED)
-@PrimaryKeyJoinColumn(name = "usuario_id", referencedColumnName = "email")
+@Table(name="colaborador",schema="dbo")
+@PrimaryKeyJoinColumn(name = "email", referencedColumnName = "email")
 @EntityListeners(AtivoInativoListener.class)
 public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
 	@Temporal(TemporalType.TIMESTAMP)

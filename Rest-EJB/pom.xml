@@ -39,5 +39,12 @@
 		<version>1.0.4.Final</version>
 		<scope>provided</scope>
 	</dependency>
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-jaxrs</artifactId>
+		<version>1.9.13</version>
+		<scope>provided</scope>
+	</dependency>
+	
   </dependencies>
 </project>

@@ -1,6 +1,5 @@
 package com.rest.test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -11,9 +10,11 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import com.rest.business.UsuarioBusiness;
 import com.rest.entitys.Usuario;
@@ -29,15 +30,12 @@ public class UsuarioRest {
 	
 	@Inject
 	private UsuarioBusiness usuarioBusiness;
+	@Context
+	private UriInfo uriInfo;
 	
 	@GET
 	public List<Usuario> obterUsuarios() {
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		Usuario usuario = new Usuario();
-		usuarios.add(usuario);
-		usuarios.add(usuario);
-		usuarios.add(usuario);
-		return usuarios;
+		return usuarioBusiness.obterTodos();
 	}
 
 	@GET
@@ -50,7 +48,7 @@ public class UsuarioRest {
 	public Response criarUsuario(Usuario usuario) {
 		try {
 			usuarioBusiness.incluir(usuario);
-			return Response.status(Status.CREATED).build();
+			return Response.created(uriInfo.getAbsolutePathBuilder().path(usuario.getEmail()).build()).build();
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -17,6 +19,7 @@ import com.rest.string.Constantes;
 
 @Entity
 @Table(name="usuario",schema="dbo")
+@Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({@NamedQuery(name=Constantes.USUARIO_LISTAR_TODOS, query = "SELECT u FROM Usuario u")})
 public class Usuario {
 	

@@ -19,7 +19,7 @@ public class Musculo {
 	@Column(name="nome")
 	private String nome;
 	
-	@Column(name="nome")
+	@Column(name="apelido")
 	private String apelido;
 	
 	public Long getId() {

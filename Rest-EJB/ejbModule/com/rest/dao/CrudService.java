@@ -71,10 +71,10 @@ public class CrudService<T> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public T obterPorId(Class<T> type , Object id) {
-		Query query = em.createQuery("SELECT t FROM "+type.getName()+" t WHERE t.id = :id");
-		query.setParameter("id", id);
-		return (T) query.getSingleResult();
+	public List<T> obterTodos(Class<T> clazz) {
+		Query query = em.createQuery("SELECT t FROM "+clazz.getName()+" t");
+		return query.getResultList();
 	}
+	
 
 }

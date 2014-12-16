@@ -2,29 +2,27 @@ package com.rest.entitys;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.rest.enums.PeriodoPagamentoEnum;
 
 @Entity
-@Table
-@Inheritance(strategy = InheritanceType.JOINED)
-@PrimaryKeyJoinColumn(name = "usuario_id", referencedColumnName = "email")
+@Table(name="cliente", schema="dbo")
+@PrimaryKeyJoinColumn(name = "email", referencedColumnName = "email")
 public class Cliente extends Usuario {
+	
 	@ManyToOne
 	@JoinColumn(name = "plano_id", referencedColumnName = "id")
 	private Plano plano;
 
-	@Column(name = "descontoPorcentagem")
+	@OneToMany(mappedBy="cliente")
 	private List<Desconto> descontos;
 
 	@Enumerated(EnumType.STRING)

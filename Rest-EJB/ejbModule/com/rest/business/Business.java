@@ -1,8 +1,9 @@
 package com.rest.business;
 
-import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import com.rest.dao.CrudService;
+import com.rest.entitys.Unidade;
 import com.rest.exceptions.BusinessException;
 
 public abstract class Business<T> {
@@ -15,10 +16,19 @@ public abstract class Business<T> {
 	}
 
 	public abstract CrudService<T> getDao();
-	
+
 	public T obterPorId(Long id) {
-		@SuppressWarnings("unchecked")
-		Class<T> clazz = ((Class<T>) ((ParameterizedType) getDao().getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
-		return getDao().obterPorId(clazz, id);
+		Class<T> clazz = obterClassNoContexto();
+		return getDao().find(clazz, id);
+	}
+
+	public List<T> obterTodos() {
+		return getDao().obterTodos(obterClassNoContexto());
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private Class<T> obterClassNoContexto() {
+		return (Class<T>) Unidade.class;
 	}
 }
