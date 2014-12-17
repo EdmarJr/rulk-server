@@ -20,7 +20,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.authentication.token.UsuarioLogadoContext;
+import com.rest.authentication.token.SecurityContext;
 import com.rest.business.UnidadeBusiness;
 import com.rest.entitys.Unidade;
 import com.rest.exceptions.BusinessException;
@@ -36,7 +36,7 @@ public class UnidadeRest extends Rest {
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
 	@Inject
-	private UsuarioLogadoContext usuarioLogado;
+	private SecurityContext usuarioLogado;
 	
 	@GET
 	@PermitAll

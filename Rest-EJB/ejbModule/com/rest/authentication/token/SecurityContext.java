@@ -7,7 +7,7 @@ import javax.enterprise.context.RequestScoped;
 import com.rest.entitys.Usuario;
 
 @RequestScoped
-public class UsuarioLogadoContext {
+public class SecurityContext {
 	
 	private LocalDate dataUltimoAcesso;
 	private Usuario usuario;
@@ -16,7 +16,7 @@ public class UsuarioLogadoContext {
 		return dataUltimoAcesso;
 	}
 
-	public UsuarioLogadoContext setDataUltimoAcesso(LocalDate dataUltimoAcesso) {
+	public SecurityContext setDataUltimoAcesso(LocalDate dataUltimoAcesso) {
 		this.dataUltimoAcesso = dataUltimoAcesso;
 		return this;
 	}
@@ -25,7 +25,7 @@ public class UsuarioLogadoContext {
 		return usuario;
 	}
 
-	public UsuarioLogadoContext setUsuario(Usuario usuario) {
+	public SecurityContext setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 		return this;
 	}

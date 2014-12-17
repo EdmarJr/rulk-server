@@ -30,17 +30,17 @@ public class AuthenticationService implements Serializable {
 	@Inject
 	private CrudService<Usuario> dao;
 	
-	private Hashtable<String, UsuarioLogadoContext> mapaDeUsuariosLogados;
+	private Hashtable<String, SecurityContext> mapaDeUsuariosLogados;
 	
 	public AuthenticationService() {
-		mapaDeUsuariosLogados = new Hashtable<String, UsuarioLogadoContext>();
+		mapaDeUsuariosLogados = new Hashtable<String, SecurityContext>();
 	}
 	
 	@Inject
-	private UsuarioLogadoContext usuarioLogadoContext;
+	private SecurityContext securityContext;
 
 
-	public String autenticarUsuario(String email,String senha) throws AutenticacaoException {
+	public TokenSecurity autenticarUsuario(String email,String senha) throws AutenticacaoException {
 		List<Usuario> result;
 		try {
 			result = obterUsuariosPorEmailEHashSenha(email,senha);
@@ -48,9 +48,9 @@ public class AuthenticationService implements Serializable {
 				registrarContextoUsuarioLogado(result.get(0), result);
 			else
 				throw new AutenticacaoException();
-			String token =  HashGenerator.generateHash(usuarioLogadoContext.toString());
-			mapaDeUsuariosLogados.put(token, usuarioLogadoContext);
-			return token;
+			String token =  HashGenerator.generateHash(securityContext.toString());
+			mapaDeUsuariosLogados.put(token, securityContext);
+			return new TokenSecurity().setToken(token);
 		} catch (HashException e) {
 			throw new AutenticacaoException(e);
 		}
@@ -60,7 +60,7 @@ public class AuthenticationService implements Serializable {
 	private void registrarContextoUsuarioLogado(Usuario usuario,
 			List<Usuario> result) {
 		if(VerificadorLista.sePossuiUmElemento(result)) {
-			usuarioLogadoContext.setUsuario(usuario).setDataUltimoAcesso(LocalDate.now());
+			securityContext.setUsuario(usuario).setDataUltimoAcesso(LocalDate.now());
 		}
 	}
 	

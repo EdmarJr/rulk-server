@@ -4,7 +4,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.rest.authentication.token.UsuarioLogadoContext;
+import com.rest.authentication.token.SecurityContext;
 import com.rest.dao.CrudService;
 import com.rest.entitys.Usuario;
 import com.rest.exceptions.BusinessException;
@@ -19,7 +19,7 @@ public class UsuarioBusiness extends Business<Usuario> {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private UsuarioLogadoContext usuarioLogado;
+	private SecurityContext usuarioLogado;
 	
 	@Inject
 	private CrudService<Usuario> dao;
