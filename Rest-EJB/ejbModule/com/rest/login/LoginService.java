@@ -12,11 +12,15 @@ import javax.persistence.PersistenceContextType;
 import com.rest.entitys.Empresa;
 import com.rest.entitys.Unidade;
 import com.rest.entitys.Usuario;
-import com.rest.string.Constantes;
 
 @Stateful
 @TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-public class LoginService implements Serializable  {
+public class LoginService implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@PersistenceContext(type = PersistenceContextType.EXTENDED)
 	private EntityManager manager;
@@ -32,7 +36,7 @@ public class LoginService implements Serializable  {
 		gerenciarCampoUsuario();
 		return usuarioLogado.getUnidade();
 
-	}	
+	}
 
 	public Empresa obterEmpresaNoContexto() {
 		gerenciarCampoUsuario();
@@ -48,7 +52,7 @@ public class LoginService implements Serializable  {
 
 	private void definirUsuarioLogado() {
 		this.usuarioLogado = (Usuario) manager
-				.createNamedQuery(Constantes.USUARIO_LISTAR_TODOS)
+				.createQuery("SELECT t FROM " + Usuario.class.getName() + " t")
 				.getResultList().get(0);
 	}
 }

@@ -3,6 +3,9 @@ package com.rest.test;
 import java.net.URI;
 import java.util.List;
 
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -36,12 +39,14 @@ public class UnidadeRest extends Rest {
 	private LoginService loginService;
 	
 	@GET
+	@PermitAll
 	public List<Unidade> obterTodos() {
 		return loginService.obterUsuarioLogado().getEmpresa().getUnidades();
 		
 	}
 	
 	@POST
+	@RolesAllowed("ADMIN")
 	public Response incluir(Unidade unidade) {
 		try {
 			unidadeBusiness.incluir(unidade);
@@ -56,6 +61,7 @@ public class UnidadeRest extends Rest {
 
 	@GET
 	@Path("/{id}")
+	@DenyAll
 	public Unidade getUnidade(@PathParam("id") Long id) {
 		return unidadeBusiness.obterPorId(id);
 	}

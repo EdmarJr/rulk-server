@@ -1,13 +1,11 @@
 package com.rest.entitys;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 public class Pagamento {
 	@Id
@@ -16,12 +14,11 @@ public class Pagamento {
 	private Long id;
 	@Column(name = "valorPago")
 	private Double valorPago;
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dataPagamento")
-	private Date dataPagamento;
+	private LocalDate dataPagamento;
 	@Column(name = "descricao")
 	private String descricao;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -38,11 +35,11 @@ public class Pagamento {
 		this.valorPago = valorPago;
 	}
 
-	public Date getDataPagamento() {
+	public LocalDate getDataPagamento() {
 		return dataPagamento;
 	}
 
-	public void setDataPagamento(Date dataPagamento) {
+	public void setDataPagamento(LocalDate dataPagamento) {
 		this.dataPagamento = dataPagamento;
 	}
 

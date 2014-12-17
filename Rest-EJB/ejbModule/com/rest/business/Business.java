@@ -1,12 +1,18 @@
 package com.rest.business;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.rest.dao.CrudService;
 import com.rest.entitys.Unidade;
 import com.rest.exceptions.BusinessException;
 
-public abstract class Business<T> {
+public abstract class Business<T> implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void incluir(T t) throws BusinessException {
 		getDao().create(t);
 	}

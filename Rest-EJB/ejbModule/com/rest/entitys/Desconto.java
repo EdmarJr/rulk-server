@@ -1,6 +1,6 @@
 package com.rest.entitys;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.rest.enums.PositivoNegativoEnum;
 
@@ -33,13 +31,11 @@ public class Desconto {
 	@Column(name="descricao")
 	private String descricao;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dataInicio")
-	private Date dataInicio;
+	private LocalDate dataInicio;
 	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dataFim")
-	private Date dataFim;
+	private LocalDate dataFim;
 
 	@Column(name="valorDesconto")
 	private Double valorDesconto;
@@ -63,21 +59,29 @@ public class Desconto {
 	public void setTipoDesconto(PositivoNegativoEnum tipoDesconto) {
 		this.tipoDesconto = tipoDesconto;
 	}
-
-	public Date getDataInicio() {
+	
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public Date getDataFim() {
+	public LocalDate getDataFim() {
 		return dataFim;
 	}
 
-	public void setDataFim(Date dataFim) {
+	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public Double getValorDesconto() {
@@ -95,6 +99,7 @@ public class Desconto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
 	
 	
 	

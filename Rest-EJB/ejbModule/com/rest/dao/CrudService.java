@@ -1,5 +1,6 @@
 package com.rest.dao;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,13 @@ import javax.persistence.Query;
 
 @Stateless
 @LocalBean
-public class CrudService<T> {
+public class CrudService<T> implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@PersistenceContext
 	private EntityManager em;
 

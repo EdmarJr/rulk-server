@@ -13,6 +13,11 @@ import com.rest.login.LoginService;
 @LocalBean
 public class UsuarioBusiness extends Business<Usuario> {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private LoginService loginService;
 	
