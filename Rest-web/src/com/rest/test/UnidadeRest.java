@@ -20,10 +20,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import com.rest.authentication.token.UsuarioLogadoContext;
 import com.rest.business.UnidadeBusiness;
 import com.rest.entitys.Unidade;
 import com.rest.exceptions.BusinessException;
-import com.rest.login.LoginService;
 
 @ApplicationScoped
 @Path(value = "/unidades")
@@ -36,12 +36,12 @@ public class UnidadeRest extends Rest {
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
 	@Inject
-	private LoginService loginService;
+	private UsuarioLogadoContext usuarioLogado;
 	
 	@GET
 	@PermitAll
 	public List<Unidade> obterTodos() {
-		return loginService.obterUsuarioLogado().getEmpresa().getUnidades();
+		return usuarioLogado.getUsuario().getEmpresa().getUnidades();
 		
 	}
 	

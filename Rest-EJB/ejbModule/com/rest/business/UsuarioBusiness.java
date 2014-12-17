@@ -4,10 +4,10 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.rest.authentication.token.UsuarioLogadoContext;
 import com.rest.dao.CrudService;
 import com.rest.entitys.Usuario;
 import com.rest.exceptions.BusinessException;
-import com.rest.login.LoginService;
 
 @Stateless
 @LocalBean
@@ -19,7 +19,7 @@ public class UsuarioBusiness extends Business<Usuario> {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private LoginService loginService;
+	private UsuarioLogadoContext usuarioLogado;
 	
 	@Inject
 	private CrudService<Usuario> dao;
@@ -31,7 +31,7 @@ public class UsuarioBusiness extends Business<Usuario> {
 	
 	@Override
 	public void incluir(Usuario usuario) throws BusinessException {
-		usuario.setUnidade(loginService.obterUnidadeNoContexto());
+		usuario.setUnidade(usuarioLogado.getUsuario().getUnidade());
 		dao.create(usuario);
 	}
 }
