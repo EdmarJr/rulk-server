@@ -16,6 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.rest.string.Constantes;
 
 @Entity
@@ -77,7 +79,8 @@ public class Usuario {
 	public Empresa getEmpresa() {
 		return this.getUnidade().getEmpresa();
 	}
-
+	
+	@JsonIgnore
 	public String getHashSenha() {
 		return hashSenha;
 	}
@@ -86,10 +89,11 @@ public class Usuario {
 		this.hashSenha = hashSenha;
 	}
 
+	@JsonIgnore
 	public List<String> getTelefones() {
 		return telefones;
 	}
-
+	
 	public void setTelefones(List<String> telefones) {
 		this.telefones = telefones;
 	}

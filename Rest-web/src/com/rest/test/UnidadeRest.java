@@ -6,7 +6,7 @@ import java.util.List;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,12 +20,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.authentication.token.SecurityContext;
 import com.rest.business.UnidadeBusiness;
 import com.rest.entitys.Unidade;
 import com.rest.exceptions.BusinessException;
 
-@ApplicationScoped
+@RequestScoped
 @Path(value = "/unidades")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -35,8 +34,6 @@ public class UnidadeRest extends Rest {
 
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
-	@Inject
-	private SecurityContext usuarioLogado;
 	
 	@GET
 	@PermitAll

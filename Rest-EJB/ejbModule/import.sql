@@ -7,3 +7,4 @@ DBCC CHECKIDENT (empresa, RESEED, 0);
 insert into dbo.empresa (email,ativo,nome,telefone) values ('teste@gmail.com','true','Teste','6182089940');
 insert into dbo.unidade (ativo,nome,empresa_id) values ('true','Unidade Teste',1);
 insert into dbo.usuario(email,cpf,unidade_id) values ('teste@gmail.com','75394073104',1);
+insert into dbo.usuario values ('edmarfagunde@gmail.com','75394073104',NULL,'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',1);

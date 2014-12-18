@@ -9,6 +9,26 @@
   <packaging>war</packaging>
   <name>Rest WAR</name>
   <dependencies>
+<!--  	 <dependency> -->
+<!-- 		<groupId>org.springframework.security</groupId> -->
+<!-- 		<artifactId>spring-security-core</artifactId> -->
+<!-- 		<version>3.2.5.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework.security</groupId> -->
+<!-- 		<artifactId>spring-security-config</artifactId> -->
+<!-- 		<version>3.2.5.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>org.springframework.security</groupId> -->
+<!-- 		<artifactId>spring-security-web</artifactId> -->
+<!-- 		<version>3.2.5.RELEASE</version> -->
+<!-- 	</dependency> -->
+<!-- 	<dependency> -->
+<!-- 		<groupId>cglib</groupId> -->
+<!-- 		<artifactId>cglib</artifactId> -->
+<!-- 		<version>3.1</version> -->
+<!-- 	</dependency> -->
   	<dependency>
   		<groupId>org.jboss.spec.javax.ejb</groupId>
   		<artifactId>jboss-ejb-api_3.2_spec</artifactId>

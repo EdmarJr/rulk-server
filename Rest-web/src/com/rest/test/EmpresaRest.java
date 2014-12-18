@@ -2,8 +2,9 @@ package com.rest.test;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import javax.annotation.security.PermitAll;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -23,20 +24,21 @@ import com.rest.exceptions.BusinessException;
 
 
 
-@ApplicationScoped
+@RequestScoped
 @Path("/empresas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class EmpresaRest {
 	
-	@Inject 
+	@EJB
 	private EmpresaBusiness business;
 	@Context
 	private UriInfo uriInfo;
 	
 	@GET
+	@PermitAll
 	public List<Empresa> obterUsuarios() {
-		return null;
+		return business.obterTodos();
 	}
 
 	@GET
