@@ -1,12 +1,11 @@
 package com.rest.test;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.security.DenyAll;
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -20,25 +19,32 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import com.rest.authentication.SecurityContext;
 import com.rest.business.UnidadeBusiness;
+import com.rest.entitys.Plano;
 import com.rest.entitys.Unidade;
-import com.rest.exceptions.BusinessException;
+import com.rest.utils.exceptions.BusinessException;
 
-@RequestScoped
+@ApplicationScoped
 @Path(value = "/unidades")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UnidadeRest extends Rest {
+public class UnidadeResource extends Rest {
 	@Context
 	private UriInfo uriInfo;
-
+	
+	@Inject
+	private SecurityContext securityContext;
+	
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
 	
 	@GET
-	@PermitAll
+	@RolesAllowed("ADMIN")
 	public List<Unidade> obterTodos() {
-		return usuarioLogado.getUsuario().getEmpresa().getUnidades();
+		List<Unidade> unidades = new ArrayList<>();
+		unidades.add(securityContext.getUsuarioLogado().getUnidade());
+		return unidades;
 		
 	}
 	
@@ -57,10 +63,9 @@ public class UnidadeRest extends Rest {
 	}
 
 	@GET
-	@Path("/{id}")
-	@DenyAll
-	public Unidade getUnidade(@PathParam("id") Long id) {
-		return unidadeBusiness.obterPorId(id);
+	@Path("/{id}/planos")
+	public List<Plano> getUnidade(@PathParam("id") Long id) {
+		return unidadeBusiness.obterPorIdComEagerPlanos(id).getPlanos();
 	}
 	
 

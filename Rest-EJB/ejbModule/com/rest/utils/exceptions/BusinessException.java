@@ -1,4 +1,4 @@
-package com.rest.exceptions;
+package com.rest.utils.exceptions;
 
 import javax.ejb.ApplicationException;
 

@@ -11,29 +11,36 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+import com.rest.utils.string.Constantes;
+
 @Entity
-@Table(name="plano",schema="dbo")
+@Table(name = "plano", schema = "dbo")
+@NamedQueries(@NamedQuery(name = Constantes.PLANOS_OBTER_POR_UNIDADE, query = "SELECT p from Plano p WHERE p.unidade.id=:unidade_id"))
 public class Plano {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="unidade_id",referencedColumnName="id")
+	@JoinColumn(name = "unidade_id", referencedColumnName = "id")
 	private Unidade unidade;
-	
-	@Column(name="nome")
+
+	@Column(name = "nome")
 	private String nome;
-	
-	@Column(name="valor_mensal")
+
+	@Column(name = "valor_mensal")
 	private Double valorMensal;
-	
+
 	@ManyToMany
-	@JoinTable(name="plano_has_modalidade",joinColumns=@JoinColumn(name="modalidade_id",referencedColumnName="id"),inverseJoinColumns=@JoinColumn(name="plano_id",referencedColumnName="id"))
+	@JoinTable(name = "plano_has_modalidade", joinColumns = @JoinColumn(name = "modalidade_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "plano_id", referencedColumnName = "id"))
 	private List<Modalidade> modalidadesDisponiveis;
 
 	public Long getId() {
@@ -68,12 +75,14 @@ public class Plano {
 		this.valorMensal = valorMensal;
 	}
 
+	@JsonIgnore
 	public List<Modalidade> getModalidadesDisponiveis() {
 		return modalidadesDisponiveis;
 	}
 
-	public void setModalidadesDisponiveis(List<Modalidade> modalidadesDisponiveis) {
+	public void setModalidadesDisponiveis(
+			List<Modalidade> modalidadesDisponiveis) {
 		this.modalidadesDisponiveis = modalidadesDisponiveis;
 	}
-	
+
 }

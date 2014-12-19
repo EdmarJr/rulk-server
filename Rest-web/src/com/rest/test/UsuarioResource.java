@@ -16,9 +16,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.business.UsuarioBusiness;
+import com.rest.business.PlanoBusiness;
+import com.rest.business.UserBusiness;
 import com.rest.entitys.Usuario;
-import com.rest.exceptions.BusinessException;
+import com.rest.utils.exceptions.BusinessException;
 
 
 
@@ -26,12 +27,14 @@ import com.rest.exceptions.BusinessException;
 @Path("/usuarios")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UsuarioRest {
+public class UsuarioResource {
 	
 	@Inject
-	private UsuarioBusiness usuarioBusiness;
+	private UserBusiness usuarioBusiness;
 	@Context
 	private UriInfo uriInfo;
+	@Inject
+	private PlanoBusiness planoBusiness;
 	
 	@GET
 	public List<Usuario> obterUsuarios() {

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,10 +21,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
+import com.rest.utils.string.Constantes;
 
 @Entity
 @Table(name = "unidade", schema = "dbo")
 @EntityListeners(AtivoInativoListener.class)
+@NamedQueries(@NamedQuery(name = Constantes.UNIDADE_POR_ID_COM_EAGER_PLANOS, query = "SELECT u from Unidade u JOIN FETCH u.planos WHERE u.id = :id "))
 public class Unidade implements ObjetoComExclusaoLogica {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,18 +37,18 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	private String nome;
 	@ManyToOne
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
-	private Empresa empresa;
+	private Company empresa;
 	@OneToOne
-	@JoinColumn(name="responsavel_id",referencedColumnName="email")
+	@JoinColumn(name = "responsavel_id", referencedColumnName = "email")
 	private Colaborador responsavel;
 	@Column(name = "ativo")
 	private Boolean ativo;
 	@OneToMany(mappedBy = "unidade")
 	private List<Usuario> clientes;
-	@OneToMany(mappedBy="unidade")
+	@OneToMany(mappedBy = "unidade")
 	private List<Aparelho> aparelhos;
-	@OneToMany(mappedBy="unidade")
-	private List<Plano> planosDisponiveis;
+	@OneToMany(mappedBy = "unidade")
+	private List<Plano> planos;
 
 	public Long getId() {
 		return id;
@@ -62,11 +66,11 @@ public class Unidade implements ObjetoComExclusaoLogica {
 		this.nome = nome;
 	}
 
-	public Empresa getEmpresa() {
+	public Company getEmpresa() {
 		return empresa;
 	}
 
-	public void setEmpresa(Empresa empresa) {
+	public void setEmpresa(Company empresa) {
 		this.empresa = empresa;
 	}
 
@@ -77,6 +81,7 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
+
 	@JsonIgnore
 	public List<Usuario> getClientes() {
 		return clientes;
@@ -85,6 +90,7 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	public void setClientes(List<Usuario> clientes) {
 		this.clientes = clientes;
 	}
+
 	@JsonIgnore
 	public List<Aparelho> getAparelhos() {
 		return aparelhos;
@@ -93,13 +99,14 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	public void setAparelhos(List<Aparelho> aparelhos) {
 		this.aparelhos = aparelhos;
 	}
+
 	@JsonIgnore
-	public List<Plano> getPlanosDisponiveis() {
-		return planosDisponiveis;
+	public List<Plano> getPlanos() {
+		return planos;
 	}
 
-	public void setPlanosDisponiveis(List<Plano> planosDisponiveis) {
-		this.planosDisponiveis = planosDisponiveis;
+	public void setPlanos(List<Plano> planos) {
+		this.planos = planos;
 	}
 
 	public Colaborador getResponsavel() {
@@ -109,9 +116,5 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	public void setResponsavel(Colaborador responsavel) {
 		this.responsavel = responsavel;
 	}
-	
-	
 
-	
-	
 }

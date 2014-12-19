@@ -20,9 +20,9 @@ import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
 
 @Entity
-@Table(name="empresa",schema="dbo")
+@Table(name = "empresa", schema = "dbo")
 @EntityListeners(AtivoInativoListener.class)
-public class Empresa implements ObjetoComExclusaoLogica {
+public class Company implements ObjetoComExclusaoLogica {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column

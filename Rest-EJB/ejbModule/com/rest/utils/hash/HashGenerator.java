@@ -1,9 +1,9 @@
-package com.rest.hash;
+package com.rest.utils.hash;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.rest.exceptions.HashException;
+import com.rest.utils.exceptions.HashException;
 
 public class HashGenerator {
 	public static String generateHash(String text) throws HashException {

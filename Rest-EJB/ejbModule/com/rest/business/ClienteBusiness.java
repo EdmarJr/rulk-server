@@ -5,11 +5,11 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.rest.dao.CrudService;
-import com.rest.entitys.Empresa;
+import com.rest.entitys.Cliente;
 
 @Stateless
 @LocalBean
-public class EmpresaBusiness extends Business<Empresa>{
+public class ClienteBusiness extends Business<Cliente> {
 
 	/**
 	 * 
@@ -17,9 +17,9 @@ public class EmpresaBusiness extends Business<Empresa>{
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private CrudService<Empresa> dao;
+	private CrudService<Cliente> dao;
 
-	public CrudService<Empresa> getDao() {
+	public CrudService<Cliente> getDao() {
 		return dao;
 	}
 	

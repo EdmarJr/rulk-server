@@ -6,15 +6,16 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.rest.authentication.SecurityContext;
 import com.rest.dao.CrudService;
 import com.rest.dao.QueryParameter;
 import com.rest.entitys.Usuario;
-import com.rest.exceptions.BusinessException;
-import com.rest.string.Constantes;
+import com.rest.utils.exceptions.BusinessException;
+import com.rest.utils.string.Constantes;
 
 @Stateless
 @LocalBean
-public class UsuarioBusiness extends Business<Usuario> {
+public class UserBusiness extends Business<Usuario> {
 	
 	/**
 	 * 
@@ -24,6 +25,9 @@ public class UsuarioBusiness extends Business<Usuario> {
 	@Inject
 	private CrudService<Usuario> dao;
 	
+	@Inject
+	private SecurityContext securityContext;
+
 	@Override
 	public CrudService<Usuario> getDao() {
 		return dao;
@@ -31,7 +35,7 @@ public class UsuarioBusiness extends Business<Usuario> {
 	
 	@Override
 	public void incluir(Usuario usuario) throws BusinessException {
-		usuario.setUnidade(securityContext.getUsuario().getUnidade());
+		usuario.setUnidade(securityContext.getUsuarioLogado().getUnidade());
 		dao.create(usuario);
 	}
 

@@ -1,11 +1,14 @@
 package com.rest.entitys;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -18,7 +21,8 @@ import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import com.rest.string.Constantes;
+import com.rest.enums.SexoEnum;
+import com.rest.utils.string.Constantes;
 
 @Entity
 @Table(name = "usuario", schema = "dbo")
@@ -29,12 +33,21 @@ public class Usuario {
 	@Id
 	@Column(name = "email")
 	private String email;
+	@Column(name = "nome")
+	private String nome;
+	@Column(name = "rg")
+	private String rg;
+	@Column(name = "orgaoExpedidor")
+	private String orgaoExpedidor;
 	@Column(name = "hashSenha")
 	private String hashSenha;
 	@Column(name = "foto")
 	private String foto;
 	@Column(name = "cpf")
 	private String cpf;
+	@Column(name = "sexo")
+	@Enumerated(EnumType.STRING)
+	private SexoEnum sexo;
 	@ElementCollection
 	@CollectionTable(name = "telefones", schema = "dbo")
 	private List<String> telefones;
@@ -42,7 +55,9 @@ public class Usuario {
 	@JoinColumn(name = "unidade_id", referencedColumnName = "id")
 	private Unidade unidade;
 	@Transient
-	private String senha;
+	private String password;
+	@Column(name = "dataNascimento")
+	private LocalDate dataNascimento;
 
 	public String getEmail() {
 		return email;
@@ -76,7 +91,7 @@ public class Usuario {
 		this.unidade = unidade;
 	}
 
-	public Empresa getEmpresa() {
+	public Company getEmpresa() {
 		return this.getUnidade().getEmpresa();
 	}
 	
@@ -98,12 +113,12 @@ public class Usuario {
 		this.telefones = telefones;
 	}
 	
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override

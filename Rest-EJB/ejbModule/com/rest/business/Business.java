@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.rest.dao.CrudService;
 import com.rest.entitys.Unidade;
-import com.rest.exceptions.BusinessException;
+import com.rest.utils.exceptions.BusinessException;
 
 public abstract class Business<T> implements Serializable {
 	/**

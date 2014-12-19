@@ -18,9 +18,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.business.EmpresaBusiness;
-import com.rest.entitys.Empresa;
-import com.rest.exceptions.BusinessException;
+import com.rest.business.CompanyBusiness;
+import com.rest.entitys.Company;
+import com.rest.utils.exceptions.BusinessException;
 
 
 
@@ -28,27 +28,27 @@ import com.rest.exceptions.BusinessException;
 @Path("/empresas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class EmpresaRest {
+public class EmpresaResource {
 	
 	@EJB
-	private EmpresaBusiness business;
+	private CompanyBusiness business;
 	@Context
 	private UriInfo uriInfo;
 	
 	@GET
 	@PermitAll
-	public List<Empresa> obterUsuarios() {
+	public List<Company> obterUsuarios() {
 		return business.obterTodos();
 	}
 
 	@GET
 	@Path("/{id}")
-	public Empresa obterUsuarioMock(@PathParam("id") Long id) {
+	public Company obterUsuarioMock(@PathParam("id") Long id) {
 		return null;
 	}
 	
 	@POST
-	public Response adicionar(@Valid Empresa empresa) {
+	public Response adicionar(@Valid Company empresa) {
 		try {
 			business.incluir(empresa);
 		} catch (BusinessException e) {
