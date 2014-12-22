@@ -10,6 +10,7 @@ import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.module.SimpleModule;
 
+import com.rest.enums.PeriodoPagamentoEnum;
 import com.rest.enums.SexoEnum;
 
 @Provider
@@ -30,6 +31,8 @@ public class JacksonConfig
 				null));
 
 		module.addDeserializer(LocalDate.class, new LocalDateDeserializer());
+		module.addDeserializer(PeriodoPagamentoEnum.class,
+				new PeriodoPagamentoEnumDeserializer());
 		module.addDeserializer(SexoEnum.class, new SexoEnumDeserializer());
 		objectMapper.registerModule(module);
 	}

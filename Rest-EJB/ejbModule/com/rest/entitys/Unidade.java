@@ -26,7 +26,7 @@ import com.rest.utils.string.Constantes;
 @Entity
 @Table(name = "unidade", schema = "dbo")
 @EntityListeners(AtivoInativoListener.class)
-@NamedQueries(@NamedQuery(name = Constantes.UNIDADE_POR_ID_COM_EAGER_PLANOS, query = "SELECT u from Unidade u JOIN FETCH u.planos WHERE u.id = :id "))
+@NamedQueries(@NamedQuery(name = Constantes.UNIDADE_POR_ID_COM_EAGER_PLANOS, query = "SELECT u from Unidade u LEFT JOIN FETCH u.planos WHERE u.id = :id "))
 public class Unidade implements ObjetoComExclusaoLogica {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.business.PlanoBusiness;
 import com.rest.business.UserBusiness;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
@@ -33,8 +32,6 @@ public class UsuarioResource {
 	private UserBusiness usuarioBusiness;
 	@Context
 	private UriInfo uriInfo;
-	@Inject
-	private PlanoBusiness planoBusiness;
 	
 	@GET
 	public List<Usuario> obterUsuarios() {

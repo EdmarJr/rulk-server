@@ -9,3 +9,5 @@ insert into dbo.unidade (ativo,nome,empresa_id) values ('true','Unidade Teste',1
 insert into dbo.usuario(email,cpf,unidade_id) values ('teste@gmail.com','75394073104',1);
 insert into dbo.usuario (email,cpf,foto,hashSenha,unidade_id)values ('edmarfagunde@gmail.com','75394073104',NULL,'8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92',1);
 insert into plano (nome,valor_mensal,unidade_id) values('Teste',1234.55,1);
+insert into colaborador (ativo,dataFim,dataInicio,email) values ('true',NULL,NULL,'edmarfagunde@gmail.com');
+insert into dbo.colaborador_has_permission_in_unidades (unidade_id,colaborador_id) values ('edmarfagunde@gmail.com',1);

@@ -9,16 +9,20 @@ import javax.persistence.EntityListeners;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
+import com.rest.utils.string.Constantes;
 
 @Entity
 @Table(name = "colaborador", schema = "dbo")
 @PrimaryKeyJoinColumn(name = "email", referencedColumnName = "email")
 @EntityListeners(AtivoInativoListener.class)
+@NamedQueries(@NamedQuery(name = Constantes.COLABORADOR_POR_ID_COM_EAGER_UNIDADES_PERMITIDAS, query = "SELECT c from Colaborador c LEFT JOIN FETCH c.unidadesComPermissoes where c.email = :email"))
 public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
 	@Column(name = "dataInicio")
 	private LocalDate dataInicio;
@@ -70,8 +74,5 @@ public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
 		}
 		return Boolean.FALSE;
 	}
-
-	
-	
 
 }

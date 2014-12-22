@@ -34,7 +34,7 @@ import com.rest.utils.string.Constantes;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", defaultImpl = Cliente.class)
 @JsonSubTypes({ @Type(value = Cliente.class, name = "Cliente"),
 		@Type(value = Colaborador.class, name = "Colaborador") })
-public class Usuario {
+public abstract class Usuario {
 
 	@Id
 	@Column(name = "email")

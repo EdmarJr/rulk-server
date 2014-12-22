@@ -2,8 +2,10 @@ package com.rest.authentication;
 
 import java.io.Serializable;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import com.rest.business.ColaboradorBusiness;
 import com.rest.entitys.Colaborador;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.UsuarioNaoEColaboradorException;
@@ -15,6 +17,9 @@ public class SecurityContext implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private ColaboradorBusiness colaboradorBusiness;
 
 	private Usuario usuarioLogado;
 	
@@ -29,7 +34,9 @@ public class SecurityContext implements Serializable {
 	public Colaborador verificarEObterColaboradorLogado()
 			throws UsuarioNaoEColaboradorException {
 		if (usuarioLogado instanceof Colaborador) {
-			return (Colaborador) usuarioLogado;
+			return (Colaborador) colaboradorBusiness
+					.obterPorEmailComEagerUnidadesPermitidas(usuarioLogado
+							.getEmail());
 		}
 
 		throw new UsuarioNaoEColaboradorException();
