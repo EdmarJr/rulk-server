@@ -20,6 +20,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonSubTypes.Type;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 import com.rest.enums.SexoEnum;
 import com.rest.utils.string.Constantes;
@@ -28,6 +31,9 @@ import com.rest.utils.string.Constantes;
 @Table(name = "usuario", schema = "dbo")
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries(@NamedQuery(name = Constantes.USUARIO_AUTENTICAR, query = "SELECT u FROM Usuario u where u.email = :email AND u.hashSenha = :hashSenha"))
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", defaultImpl = Cliente.class)
+@JsonSubTypes({ @Type(value = Cliente.class, name = "Cliente"),
+		@Type(value = Colaborador.class, name = "Colaborador") })
 public class Usuario {
 
 	@Id
@@ -58,6 +64,8 @@ public class Usuario {
 	private String password;
 	@Column(name = "dataNascimento")
 	private LocalDate dataNascimento;
+	@Transient
+	private String type;
 
 	public String getEmail() {
 		return email;
@@ -94,7 +102,7 @@ public class Usuario {
 	public Company getEmpresa() {
 		return this.getUnidade().getEmpresa();
 	}
-	
+
 	@JsonIgnore
 	public String getHashSenha() {
 		return hashSenha;
@@ -108,17 +116,65 @@ public class Usuario {
 	public List<String> getTelefones() {
 		return telefones;
 	}
-	
+
 	public void setTelefones(List<String> telefones) {
 		this.telefones = telefones;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getOrgaoExpedidor() {
+		return orgaoExpedidor;
+	}
+
+	public void setOrgaoExpedidor(String orgaoExpedidor) {
+		this.orgaoExpedidor = orgaoExpedidor;
+	}
+
+	public SexoEnum getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(SexoEnum sexo) {
+		this.sexo = sexo;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Override
@@ -150,7 +206,5 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [email=" + email + ", hashSenha=" + hashSenha + "]";
 	}
-	
-	
 
 }

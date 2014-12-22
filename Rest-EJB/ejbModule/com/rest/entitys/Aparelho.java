@@ -28,7 +28,7 @@ public class Aparelho implements ObjetoComExclusaoLogica {
 	@Column(name = "nome")
 	private String nome;
 	@ManyToMany
-	@JoinTable(name = "aparelho_has_musculo", joinColumns = @JoinColumn(name = "musculo_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "aparelho_id", referencedColumnName = "id"))
+	@JoinTable(name = "aparelho_has_musculo", schema = "dbo", joinColumns = @JoinColumn(name = "musculo_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "aparelho_id", referencedColumnName = "id"))
 	private List<Musculo> musculosAtivos;
 	@Column(name = "ativo")
 	private Boolean ativo;

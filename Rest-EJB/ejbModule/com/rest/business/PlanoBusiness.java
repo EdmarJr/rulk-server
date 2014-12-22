@@ -34,4 +34,13 @@ public class PlanoBusiness extends Business<Plano> {
 				QueryParameter.with("unidade_id", unidade.getId()).parameters());
 	}
 
+	public Boolean sePlanoDisponivel(Plano plano, Unidade unidade) {
+		List<Plano> planosDisponiveis = obterPlanosPorUnidade(unidade);
+		for (Plano p : planosDisponiveis) {
+			if (p.equals(plano))
+				return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
+	}
+
 }

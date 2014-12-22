@@ -47,4 +47,5 @@ public class UnidadeBusiness extends Business<Unidade> {
 		return VerificadorLista.sePossuiUmElemento(retorno) ? retorno.get(0)
 				: null;
 	}
+
 }

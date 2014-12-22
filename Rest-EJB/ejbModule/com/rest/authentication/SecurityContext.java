@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 import javax.inject.Singleton;
 
+import com.rest.entitys.Colaborador;
 import com.rest.entitys.Usuario;
+import com.rest.utils.exceptions.UsuarioNaoEColaboradorException;
 
 @Singleton
 public class SecurityContext implements Serializable {
@@ -22,6 +24,16 @@ public class SecurityContext implements Serializable {
 
 	public void setUsuarioLogado(Usuario usuarioLogado) {
 		this.usuarioLogado = usuarioLogado;
+	}
+
+	public Colaborador verificarEObterColaboradorLogado()
+			throws UsuarioNaoEColaboradorException {
+		if (usuarioLogado instanceof Colaborador) {
+			return (Colaborador) usuarioLogado;
+		}
+
+		throw new UsuarioNaoEColaboradorException();
+
 	}
 
 }

@@ -18,6 +18,14 @@ import com.rest.enums.PeriodoPagamentoEnum;
 @PrimaryKeyJoinColumn(name = "email", referencedColumnName = "email")
 public class Cliente extends Usuario {
 	
+	public Cliente() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Cliente(String s) {
+		this.setType(s);
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "plano_id", referencedColumnName = "id")
 	private Plano plano;
