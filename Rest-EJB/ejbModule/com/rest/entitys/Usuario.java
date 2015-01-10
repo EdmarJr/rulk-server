@@ -28,7 +28,7 @@ import com.rest.enums.SexoEnum;
 import com.rest.utils.string.Constantes;
 
 @Entity
-@Table(name = "usuario", schema = "dbo")
+@Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries(@NamedQuery(name = Constantes.USUARIO_AUTENTICAR, query = "SELECT u FROM Usuario u where u.email = :email AND u.hashSenha = :hashSenha"))
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", defaultImpl = Cliente.class)
@@ -55,7 +55,7 @@ public abstract class Usuario {
 	@Enumerated(EnumType.STRING)
 	private SexoEnum sexo;
 	@ElementCollection
-	@CollectionTable(name = "telefones", schema = "dbo")
+	@CollectionTable(name = "telefones")
 	private List<String> telefones;
 	@ManyToOne
 	@JoinColumn(name = "unidade_id", referencedColumnName = "id")

@@ -19,7 +19,7 @@ import com.rest.entitys.listeners.AtivoInativoListener;
 import com.rest.utils.string.Constantes;
 
 @Entity
-@Table(name = "colaborador", schema = "dbo")
+@Table(name = "colaborador")
 @PrimaryKeyJoinColumn(name = "email", referencedColumnName = "email")
 @EntityListeners(AtivoInativoListener.class)
 @NamedQueries(@NamedQuery(name = Constantes.COLABORADOR_POR_ID_COM_EAGER_UNIDADES_PERMITIDAS, query = "SELECT c from Colaborador c LEFT JOIN FETCH c.unidadesComPermissoes where c.email = :email"))
@@ -31,7 +31,7 @@ public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
 	@Column(name = "ativo")
 	private Boolean ativo;
 	@ManyToMany
-	@JoinTable(name = "colaborador_has_permission_in_unidades", schema = "dbo", joinColumns = @JoinColumn(name = "unidade_id", referencedColumnName = "email"), inverseJoinColumns = @JoinColumn(name = "colaborador_id", referencedColumnName = "id"))
+	@JoinTable(name = "colaborador_has_permission_in_unidades", joinColumns = @JoinColumn(name = "unidade_id", referencedColumnName = "email"), inverseJoinColumns = @JoinColumn(name = "colaborador_id", referencedColumnName = "id"))
 	private List<Unidade> unidadesComPermissoes;
 
 	public Boolean getAtivo() {

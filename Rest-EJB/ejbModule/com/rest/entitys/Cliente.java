@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import com.rest.enums.PeriodoPagamentoEnum;
 
 @Entity
-@Table(name="cliente", schema="dbo")
+@Table(name="cliente")
 @PrimaryKeyJoinColumn(name = "email", referencedColumnName = "email")
 public class Cliente extends Usuario {
 	

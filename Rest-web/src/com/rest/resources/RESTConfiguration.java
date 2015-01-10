@@ -1,4 +1,4 @@
-package com.rest.test;
+package com.rest.resources;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ApplicationPath;

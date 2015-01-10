@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import com.rest.enums.PositivoNegativoEnum;
 
 @Entity
-@Table(name = "desconto", schema = "dbo")
+@Table(name = "desconto")
 public class Desconto {
 
 	@Id

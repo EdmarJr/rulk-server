@@ -1,4 +1,4 @@
-package com.rest.test;
+package com.rest.resources;
 
 import java.net.URI;
 import java.util.ArrayList;

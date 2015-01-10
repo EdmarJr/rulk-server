@@ -20,7 +20,7 @@ import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
 
 @Entity
-@Table(name = "empresa", schema = "dbo")
+@Table(name = "empresa")
 @EntityListeners(AtivoInativoListener.class)
 public class Company implements ObjetoComExclusaoLogica {
 	@Id

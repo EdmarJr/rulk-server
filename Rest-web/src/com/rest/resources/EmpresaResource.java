@@ -1,9 +1,11 @@
-package com.rest.test;
+package com.rest.resources;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import javax.annotation.security.PermitAll;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -16,43 +18,43 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.business.UserBusiness;
-import com.rest.entitys.Usuario;
+import com.rest.business.CompanyBusiness;
+import com.rest.entitys.Company;
 import com.rest.utils.exceptions.BusinessException;
 
 
 
-@ApplicationScoped
-@Path("/usuarios")
+@RequestScoped
+@Path("/empresas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UsuarioResource {
+public class EmpresaResource {
 	
-	@Inject
-	private UserBusiness usuarioBusiness;
+	@EJB
+	private CompanyBusiness business;
 	@Context
 	private UriInfo uriInfo;
 	
 	@GET
-	public List<Usuario> obterUsuarios() {
-		return usuarioBusiness.obterTodos();
+	@PermitAll
+	public List<Company> obterUsuarios() {
+		return business.obterTodos();
 	}
 
 	@GET
 	@Path("/{id}")
-	public Usuario obterUsuarioMock(@PathParam("id") Long id) {
-		return usuarioBusiness.obterPorId(id);
+	public Company obterUsuarioMock(@PathParam("id") Long id) {
+		return null;
 	}
 	
 	@POST
-	public Response criarUsuario(Usuario usuario) {
+	public Response adicionar(@Valid Company empresa) {
 		try {
-			usuarioBusiness.incluir(usuario);
-			return Response.created(uriInfo.getAbsolutePathBuilder().path(usuario.getEmail()).build()).build();
+			business.incluir(empresa);
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
+		return Response.created(uriInfo.getAbsolutePathBuilder().path(empresa.getId().toString()).build()).build();
 	}
 }
