@@ -20,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import com.rest.utils.string.Constantes;
 
 @Entity
-@Table(name = "plano", schema = "dbo")
+@Table(name = "plano")
 @NamedQueries(@NamedQuery(name = Constantes.PLANOS_OBTER_POR_UNIDADE, query = "SELECT p from Plano p WHERE p.unidade.id=:unidade_id"))
 public class Plano {
 

@@ -1,4 +1,4 @@
-package com.rest.test;
+package com.rest.resources;
 
 public abstract class Rest {
 }
