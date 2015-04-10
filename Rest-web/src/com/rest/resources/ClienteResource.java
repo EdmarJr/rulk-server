@@ -14,7 +14,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import org.jboss.resteasy.logging.Logger;
 
 import com.rest.business.ClienteBusiness;
 import com.rest.entitys.Cliente;
@@ -27,7 +26,6 @@ import com.rest.utils.exceptions.SecurityException;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ClienteResource implements Serializable {
 
-	static Logger logger = Logger.getLogger(ClienteResource.class);
 
 	@Context
 	private UriInfo uriInfo;
@@ -46,12 +44,8 @@ public class ClienteResource implements Serializable {
 			return Response.created(
 					uriInfo.getAbsolutePathBuilder().build(cliente)).build();
 		} catch (SecurityException e) {
-			logger.warn("ERRO SEGURANÇA -- Usuário tentou incluir um cliente e ocorreu um erro de segurança. Segue descrição erro: "
-					+ e.getMessage());
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		} catch (BusinessException e) {
-			logger.info("Usuário tentou incluir um cliente e obteve um erro simples de negocio."
-					+ e.getStackTrace());
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 	}
