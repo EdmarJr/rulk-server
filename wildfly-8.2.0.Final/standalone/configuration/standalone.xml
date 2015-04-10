@@ -146,7 +146,7 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-				<datasource jndi-name="java:jboss/datasources/rulk" pool-name="rulk" enabled="true" use-java-context="true">
+                <datasource jndi-name="java:jboss/datasources/rulk" pool-name="rulk" enabled="true" use-java-context="true">
                     <connection-url>jdbc:postgresql://localhost:5432/rulk</connection-url>
                     <driver>postgresql</driver>
                     <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
@@ -167,7 +167,7 @@
                     <driver name="com.mysql" module="com.mysql">
                         <xa-datasource-class>com.mysql.jdbc.Driver</xa-datasource-class>
                     </driver>
-					<driver name="postgresql" module="org.postgresql">
+                    <driver name="postgresql" module="org.postgresql">
                         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
                     </driver>
                 </drivers>
