@@ -9,3 +9,5 @@ insert into usuario (email,cpf,foto,hashSenha,unidade_id)values ('edmarfagunde@g
 insert into plano (nome,valor_mensal,unidade_id) values('Teste',1234.55,1);
 insert into colaborador (ativo,dataFim,dataInicio,email) values ('true',NULL,NULL,'edmarfagunde@gmail.com');
 insert into colaborador_has_permission_in_unidades (unidade_id,colaborador_id) values ('edmarfagunde@gmail.com',1);
+insert into grupo values ('ADMINISTRADOR');
+insert into usuario_grupo values ('ADMINISTRADOR','edmarfagunde@gmail.com');

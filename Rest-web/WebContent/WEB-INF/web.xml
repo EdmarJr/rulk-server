@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>Rest-web</display-name>
-  <servlet>
-    <description>JAX-RS Tools Generated - Do not modify</description>
-    <servlet-name>JAX-RS Servlet</servlet-name>
-    <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-<!--   <welcome-file-list> -->
-<!--     <welcome-file>angular/index.html</welcome-file> -->
-<!--    </welcome-file-list> -->
-  <servlet-mapping>
-    <servlet-name>JAX-RS Servlet</servlet-name>
-    <url-pattern>/rest/*</url-pattern>
-  </servlet-mapping>
-  <context-param>
-    <param-name>resteasy.servlet.mapping.prefix</param-name>
-    <param-value>/rest</param-value>
-  </context-param>
-  <listener>
-    <listener-class>
-         org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
-      </listener-class>
-  </listener>
+<web-app 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xmlns="http://java.sun.com/xml/ns/javaee" 
+      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+      id="WebApp_ID" version="3.0">
+   <display-name>RECAPP-API</display-name>
+  
+   <servlet-mapping>
+       <servlet-name>javax.ws.rs.core.Application</servlet-name>
+       <url-pattern>/rest/*</url-pattern>
+   </servlet-mapping>
+
   
 <!--   <context-param> -->
 <!--     <param-name>resteasy.resources</param-name> -->
 <!--     <param-value>com.rest.test.UsuarioRest,com.rest.test.EmpresaRest</param-value> -->
 <!--   </context-param> -->
+    
+    
+ <security-constraint>
+     <display-name>Constraint-0</display-name>
+     <web-resource-collection>
+         <web-resource-name>Constraint-0</web-resource-name>
+         <url-pattern>/*</url-pattern>
+     </web-resource-collection>
+     <auth-constraint>
+         <role-name>*</role-name>
+     </auth-constraint>
+     <user-data-constraint>
+         <transport-guarantee>NONE</transport-guarantee>
+     </user-data-constraint>
+</security-constraint>
+
+<login-config>
+     <auth-method>FORM</auth-method>
+     <form-login-config>
+     	<form-login-page>/rest/index.html</form-login-page>
+     	<form-error-page>/static/index.html</form-error-page>
+     </form-login-config>
+</login-config>
+
+<security-role>
+     <role-name>ADMINISTRADOR</role-name>
+</security-role>
     
 </web-app>

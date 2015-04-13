@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -40,7 +39,6 @@ public class UnidadeResource extends Rest {
 	private UnidadeBusiness unidadeBusiness;
 	
 	@GET
-	@RolesAllowed("ADMIN")
 	public List<Unidade> obterTodos() {
 		List<Unidade> unidades = new ArrayList<>();
 		unidades.add(securityContext.getUsuarioLogado().getUnidade());
@@ -49,7 +47,6 @@ public class UnidadeResource extends Rest {
 	}
 	
 	@POST
-	@RolesAllowed("ADMIN")
 	public Response incluir(Unidade unidade) {
 		try {
 			unidadeBusiness.incluir(unidade);

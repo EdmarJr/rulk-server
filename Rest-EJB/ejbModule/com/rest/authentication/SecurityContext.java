@@ -3,14 +3,12 @@ package com.rest.authentication;
 import java.io.Serializable;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import com.rest.business.ColaboradorBusiness;
 import com.rest.entitys.Colaborador;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.UsuarioNaoEColaboradorException;
 
-@Singleton
 public class SecurityContext implements Serializable {
 	
 	/**

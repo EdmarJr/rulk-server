@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -66,6 +67,8 @@ public abstract class Usuario {
 	private LocalDate dataNascimento;
 	@Transient
 	private String type;
+	@OneToMany(mappedBy="usuario")
+	private List<UsuarioGrupo> usuarioGrupos;
 
 	public String getEmail() {
 		return email;
@@ -175,6 +178,15 @@ public abstract class Usuario {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+
+	public List<UsuarioGrupo> getUsuarioGrupos() {
+		return usuarioGrupos;
+	}
+
+	public void setUsuarioGrupos(List<UsuarioGrupo> usuarioGrupos) {
+		this.usuarioGrupos = usuarioGrupos;
 	}
 
 	@Override

@@ -1,0 +1,4 @@
+<jboss-web>
+	<!-- <security-domain>rulk-security</security-domain> -->
+	<!-- <context-root>jaxrs-sample</context-root> -->
+</jboss-web>
