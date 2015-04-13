@@ -1,5 +1,6 @@
 package com.rest.business;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -15,7 +16,7 @@ import com.rest.utils.string.Constantes;
 
 @Stateless
 @LocalBean
-public class UserBusiness extends Business<Usuario> {
+public class UserBusiness extends Business<Usuario> implements Serializable {
 	
 	/**
 	 * 
