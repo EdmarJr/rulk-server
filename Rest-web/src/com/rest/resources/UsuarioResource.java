@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.business.UserBusiness;
+import com.rest.business.UsuarioBusiness;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
 
@@ -29,7 +29,7 @@ import com.rest.utils.exceptions.BusinessException;
 public class UsuarioResource {
 	
 	@Inject
-	private UserBusiness usuarioBusiness;
+	private UsuarioBusiness usuarioBusiness;
 	@Context
 	private UriInfo uriInfo;
 	

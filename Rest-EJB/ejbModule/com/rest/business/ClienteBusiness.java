@@ -1,5 +1,7 @@
 package com.rest.business;
 
+import java.io.Serializable;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,13 +18,12 @@ import com.rest.utils.exceptions.UsuarioNaoEColaboradorException;
 
 @Stateless
 @LocalBean
-public class ClienteBusiness extends Business<Cliente> {
+public class ClienteBusiness extends Business<Cliente> implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 5115945647928612317L;
 	@Inject
 	private CrudService<Cliente> dao;
 	@Inject

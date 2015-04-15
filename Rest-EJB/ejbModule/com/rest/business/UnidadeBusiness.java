@@ -2,8 +2,6 @@ package com.rest.business;
 
 import java.util.List;
 
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.rest.authentication.SecurityContext;
@@ -14,14 +12,7 @@ import com.rest.utils.exceptions.BusinessException;
 import com.rest.utils.list.VerificadorLista;
 import com.rest.utils.string.Constantes;
 
-@Stateless
-@LocalBean
 public class UnidadeBusiness extends Business<Unidade> {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private SecurityContext securityContext;
@@ -42,8 +33,8 @@ public class UnidadeBusiness extends Business<Unidade> {
 
 	public Unidade obterPorIdComEagerPlanos(Long id) {
 		List<Unidade> retorno = dao.findWithNamedQuery(
-				Constantes.UNIDADE_POR_ID_COM_EAGER_PLANOS,
-				QueryParameter.with("id", id).parameters());
+				Constantes.UNIDADE_POR_ID_COM_EAGER_PLANOS, QueryParameter
+						.with("id", id).parameters());
 		return VerificadorLista.sePossuiUmElemento(retorno) ? retorno.get(0)
 				: null;
 	}

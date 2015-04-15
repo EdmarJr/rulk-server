@@ -67,13 +67,6 @@
 			<artifactId>validation-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- Import the CDI API -->
-		<dependency>
-			<groupId>javax.enterprise</groupId>
-			<artifactId>cdi-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
 		<!-- Import the Common Annotations API (JSR-250) -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.annotation</groupId>

@@ -19,8 +19,8 @@ public class CrudService<T> implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -7255213568098350137L;
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -48,39 +48,45 @@ public class CrudService<T> implements Serializable {
 	public List<T> findWithNamedQuery(String namedQueryName) {
 		return this.em.createNamedQuery(namedQueryName).getResultList();
 	}
-	public List<T> findWithNamedQuery(String namedQueryName, Map<String,Object> parameters) {
+
+	public List<T> findWithNamedQuery(String namedQueryName,
+			Map<String, Object> parameters) {
 		return findWithNamedQuery(namedQueryName, parameters, 0);
 	}
+
 	@SuppressWarnings("unchecked")
 	public List<T> findWithNamedQuery(String queryName, int resultLimit) {
 		return this.em.createNamedQuery(queryName).setMaxResults(resultLimit)
 				.getResultList();
 	}
+
 	@SuppressWarnings("unchecked")
 	public List<T> findByNativeQuery(String sql, Class<T> type) {
 		return this.em.createNativeQuery(sql, type).getResultList();
 	}
+
 	@SuppressWarnings("unchecked")
-	public List<T> findWithNamedQuery(String namedQueryName, Map<String, Object> parameters,
-			int resultLimit) {
+	public List<T> findWithNamedQuery(String namedQueryName,
+			Map<String, Object> parameters, int resultLimit) {
 		Query query = this.em.createNamedQuery(namedQueryName);
 		if (resultLimit > 0)
 			query.setMaxResults(resultLimit);
 
-		Iterator<Entry<String, Object>> entries = parameters.entrySet().iterator();
+		Iterator<Entry<String, Object>> entries = parameters.entrySet()
+				.iterator();
 		while (entries.hasNext()) {
-			Entry<String, Object> thisEntry = (Entry<String, Object>) entries.next();
+			Entry<String, Object> thisEntry = (Entry<String, Object>) entries
+					.next();
 			query.setParameter(thisEntry.getKey().toString(),
 					thisEntry.getValue());
 		}
 		return query.getResultList();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<T> obterTodos(Class<T> clazz) {
-		Query query = em.createQuery("SELECT t FROM "+clazz.getName()+" t");
+		Query query = em.createQuery("SELECT t FROM " + clazz.getName() + " t");
 		return query.getResultList();
 	}
-	
 
 }

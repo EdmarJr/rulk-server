@@ -1,5 +1,6 @@
 package com.rest.business;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -14,12 +15,13 @@ import com.rest.utils.string.Constantes;
 
 @Stateless
 @LocalBean
-public class ColaboradorBusiness extends Business<Colaborador> {
+public class ColaboradorBusiness extends Business<Colaborador> implements
+		Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3914704610637873258L;
 
 	@Inject
 	private CrudService<Colaborador> dao;

@@ -1,5 +1,6 @@
 package com.rest.business;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -14,12 +15,12 @@ import com.rest.utils.string.Constantes;
 
 @Stateless
 @LocalBean
-public class PlanoBusiness extends Business<Plano> {
+public class PlanoBusiness extends Business<Plano> implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3188320421516497391L;
 	@Inject
 	private CrudService<Plano> dao;
 
@@ -31,7 +32,8 @@ public class PlanoBusiness extends Business<Plano> {
 	public List<Plano> obterPlanosPorUnidade(Unidade unidade) {
 		return dao
 				.findWithNamedQuery(Constantes.PLANOS_OBTER_POR_UNIDADE,
-				QueryParameter.with("unidade_id", unidade.getId()).parameters());
+						QueryParameter.with("unidade_id", unidade.getId())
+								.parameters());
 	}
 
 	public Boolean sePlanoDisponivel(Plano plano, Unidade unidade) {

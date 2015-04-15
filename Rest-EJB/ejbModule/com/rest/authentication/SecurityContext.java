@@ -2,6 +2,7 @@ package com.rest.authentication;
 
 import java.io.Serializable;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import com.rest.business.ColaboradorBusiness;
@@ -16,9 +17,6 @@ public class SecurityContext implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Inject
-	private ColaboradorBusiness colaboradorBusiness;
-
 	private Usuario usuarioLogado;
 	
 	public Usuario getUsuarioLogado() {
@@ -31,13 +29,9 @@ public class SecurityContext implements Serializable {
 
 	public Colaborador verificarEObterColaboradorLogado()
 			throws UsuarioNaoEColaboradorException {
-		if (usuarioLogado instanceof Colaborador) {
-			return (Colaborador) colaboradorBusiness
-					.obterPorEmailComEagerUnidadesPermitidas(usuarioLogado
-							.getEmail());
-		}
+		return null;
 
-		throw new UsuarioNaoEColaboradorException();
+		/*throw new UsuarioNaoEColaboradorException();*/
 
 	}
 

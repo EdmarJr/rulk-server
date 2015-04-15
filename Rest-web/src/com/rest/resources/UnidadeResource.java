@@ -25,7 +25,7 @@ import com.rest.entitys.Unidade;
 import com.rest.utils.exceptions.BusinessException;
 
 @ApplicationScoped
-@Path(value = "/unidades")
+@Path(value = "/secured/unidades")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UnidadeResource extends Rest {
@@ -43,7 +43,6 @@ public class UnidadeResource extends Rest {
 		List<Unidade> unidades = new ArrayList<>();
 		unidades.add(securityContext.getUsuarioLogado().getUnidade());
 		return unidades;
-		
 	}
 	
 	@POST
