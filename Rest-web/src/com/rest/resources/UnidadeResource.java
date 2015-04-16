@@ -28,23 +28,23 @@ import com.rest.utils.exceptions.BusinessException;
 @Path(value = "/secured/unidades")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class UnidadeResource extends Rest {
+public class UnidadeResource extends Resource {
 	@Context
 	private UriInfo uriInfo;
-	
+
 	@Inject
 	private SecurityContext securityContext;
-	
+
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
-	
+
 	@GET
 	public List<Unidade> obterTodos() {
 		List<Unidade> unidades = new ArrayList<>();
 		unidades.add(securityContext.getUsuarioLogado().getUnidade());
 		return unidades;
 	}
-	
+
 	@POST
 	public Response incluir(Unidade unidade) {
 		try {
@@ -63,6 +63,5 @@ public class UnidadeResource extends Rest {
 	public List<Plano> getUnidade(@PathParam("id") Long id) {
 		return unidadeBusiness.obterPorIdComEagerPlanos(id).getPlanos();
 	}
-	
 
 }

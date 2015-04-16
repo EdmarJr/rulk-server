@@ -30,7 +30,7 @@
      <auth-method>FORM</auth-method>
      <realm-name>other</realm-name>
      <form-login-config>
-     	<form-login-page>/rest/static/index</form-login-page>
+     	<form-login-page>/not-logged</form-login-page>
      	<form-error-page>/rest/static/index</form-error-page>
      </form-login-config>
 </login-config>

@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import com.rest.authentication.SecurityContext;
 import com.rest.dao.CrudService;
 import com.rest.entitys.Cliente;
-import com.rest.entitys.Colaborador;
 import com.rest.entitys.Unidade;
 import com.rest.utils.exceptions.BusinessException;
 import com.rest.utils.exceptions.PlanoNaoDisponivelException;
@@ -50,12 +49,12 @@ public class ClienteBusiness extends Business<Cliente> implements Serializable {
 		Unidade unidade = unidadeBusiness.obterPorIdComEagerPlanos(cliente
 				.getUnidade().getId());
 
-		Colaborador colaboradorLogado = securityContext
-				.verificarEObterColaboradorLogado();
-		if (!colaboradorLogado.sePossuiPermissaoEmUnidade(unidade))
-			throw new UnidadeNaoDisponivelException();
-		if (!unidade.sePossuiPlano(cliente.getPlano()))
-			throw new PlanoNaoDisponivelException();
+		// Colaborador colaboradorLogado = securityContext
+		// .verificarEObterColaboradorLogado();
+		// if (!colaboradorLogado.sePossuiPermissaoEmUnidade(unidade))
+		// throw new UnidadeNaoDisponivelException();
+		// if (!unidade.sePossuiPlano(cliente.getPlano()))
+		// throw new PlanoNaoDisponivelException();
 
 	}
 

@@ -3,36 +3,39 @@ package com.rest.authentication;
 import java.io.Serializable;
 
 import javax.annotation.Resource;
+import javax.ejb.LocalBean;
+import javax.ejb.SessionContext;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.rest.business.ColaboradorBusiness;
-import com.rest.entitys.Colaborador;
+import com.rest.dao.CrudService;
+import com.rest.dao.QueryParameter;
 import com.rest.entitys.Usuario;
-import com.rest.utils.exceptions.UsuarioNaoEColaboradorException;
 
+@Stateless
+@LocalBean
 public class SecurityContext implements Serializable {
-	
+
 	/**
-	 * 
+	 * 	
 	 */
 	private static final long serialVersionUID = 1L;
 
 	private Usuario usuarioLogado;
-	
+
+	@Resource
+	private SessionContext sessionContext;
+	@Inject
+	private CrudService<Usuario> crudServiceUsuario;
+
 	public Usuario getUsuarioLogado() {
-		return this.usuarioLogado;
+		if (usuarioLogado == null) {
+			usuarioLogado = crudServiceUsuario.findSingleResultWithNamedQuery(
+					Usuario.OBTER_POR_EMAIL,
+					QueryParameter.with("email",
+							sessionContext.getCallerPrincipal().getName())
+							.parameters());
+		}
+		return usuarioLogado;
 	}
-
-	public void setUsuarioLogado(Usuario usuarioLogado) {
-		this.usuarioLogado = usuarioLogado;
-	}
-
-	public Colaborador verificarEObterColaboradorLogado()
-			throws UsuarioNaoEColaboradorException {
-		return null;
-
-		/*throw new UsuarioNaoEColaboradorException();*/
-
-	}
-
 }

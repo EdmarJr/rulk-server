@@ -50,11 +50,6 @@
 		<!-- <version>3.1.1</version> -->
 		<!-- <scope>test</scope> -->
 		<!-- </dependency> -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.ejb</groupId>
-			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
@@ -72,18 +67,6 @@
 			<groupId>org.jboss.spec.javax.annotation</groupId>
 			<artifactId>jboss-annotations-api_1.2_spec</artifactId>
 			<scope>provided</scope>
-		</dependency>
-		<!-- Import the Servlet API -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.servlet</groupId>
-			<artifactId>jboss-servlet-api_3.1_spec</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.6.4</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<modules>

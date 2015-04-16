@@ -26,16 +26,17 @@ import org.codehaus.jackson.annotate.JsonSubTypes.Type;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 import com.rest.enums.SexoEnum;
-import com.rest.utils.string.Constantes;
 
 @Entity
 @Table(name = "usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQueries(@NamedQuery(name = Constantes.USUARIO_AUTENTICAR, query = "SELECT u FROM Usuario u where u.email = :email AND u.hashSenha = :hashSenha"))
+@NamedQueries(@NamedQuery(name = Usuario.OBTER_POR_EMAIL, query = "SELECT u FROM Usuario u where u.email = :email"))
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", defaultImpl = Cliente.class)
 @JsonSubTypes({ @Type(value = Cliente.class, name = "Cliente"),
 		@Type(value = Colaborador.class, name = "Colaborador") })
 public abstract class Usuario {
+
+	public static final String OBTER_POR_EMAIL = "obterUsuarioPorEmail";
 
 	@Id
 	@Column(name = "email")
@@ -67,7 +68,7 @@ public abstract class Usuario {
 	private LocalDate dataNascimento;
 	@Transient
 	private String type;
-	@OneToMany(mappedBy="usuario")
+	@OneToMany(mappedBy = "usuario")
 	private List<UsuarioGrupo> usuarioGrupos;
 
 	public String getEmail() {
@@ -179,7 +180,6 @@ public abstract class Usuario {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
 
 	public List<UsuarioGrupo> getUsuarioGrupos() {
 		return usuarioGrupos;

@@ -60,6 +60,12 @@ public class CrudService<T> implements Serializable {
 				.getResultList();
 	}
 
+	public T findSingleResultWithNamedQuery(String queryName,
+			Map<String, Object> parameters) {
+		List<T> resultList = findWithNamedQuery(queryName, parameters);
+		return resultList.size() > 0 ? resultList.get(0) : null;
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<T> findByNativeQuery(String sql, Class<T> type) {
 		return this.em.createNativeQuery(sql, type).getResultList();

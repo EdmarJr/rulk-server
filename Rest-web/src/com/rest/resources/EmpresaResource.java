@@ -3,8 +3,8 @@ package com.rest.resources;
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -22,19 +22,17 @@ import com.rest.business.CompanyBusiness;
 import com.rest.entitys.Company;
 import com.rest.utils.exceptions.BusinessException;
 
-
-
 @RequestScoped
 @Path("/empresas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class EmpresaResource {
-	
-	@EJB
+
+	@Inject
 	private CompanyBusiness business;
 	@Context
 	private UriInfo uriInfo;
-	
+
 	@GET
 	@PermitAll
 	public List<Company> obterUsuarios() {
@@ -46,7 +44,7 @@ public class EmpresaResource {
 	public Company obterUsuarioMock(@PathParam("id") Long id) {
 		return null;
 	}
-	
+
 	@POST
 	public Response adicionar(@Valid Company empresa) {
 		try {
@@ -55,6 +53,8 @@ public class EmpresaResource {
 			e.printStackTrace();
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
-		return Response.created(uriInfo.getAbsolutePathBuilder().path(empresa.getId().toString()).build()).build();
+		return Response.created(
+				uriInfo.getAbsolutePathBuilder()
+						.path(empresa.getId().toString()).build()).build();
 	}
 }

@@ -1,7 +1,6 @@
 package com.rest.business;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -9,15 +8,13 @@ import javax.inject.Inject;
 
 import com.rest.authentication.SecurityContext;
 import com.rest.dao.CrudService;
-import com.rest.dao.QueryParameter;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
-import com.rest.utils.string.Constantes;
 
 @Stateless
 @LocalBean
 public class UsuarioBusiness extends Business<Usuario> implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -25,7 +22,7 @@ public class UsuarioBusiness extends Business<Usuario> implements Serializable {
 
 	@Inject
 	private CrudService<Usuario> dao;
-	
+
 	@Inject
 	private SecurityContext securityContext;
 
@@ -33,14 +30,11 @@ public class UsuarioBusiness extends Business<Usuario> implements Serializable {
 	public CrudService<Usuario> getDao() {
 		return dao;
 	}
-	
+
 	@Override
 	public void incluir(Usuario usuario) throws BusinessException {
 		usuario.setUnidade(securityContext.getUsuarioLogado().getUnidade());
 		dao.create(usuario);
 	}
 
-	public List<Usuario> obterUsuariosPorEmailEHashSenha(String email, String hashSenha) {
-		return dao.findWithNamedQuery(Constantes.USUARIO_AUTENTICAR, QueryParameter.with("email", email).and("hashSenha", hashSenha).parameters());
-	}
 }
