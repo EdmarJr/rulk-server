@@ -36,7 +36,16 @@
 </login-config>
 
 <security-role>
-     <role-name>ADMINISTRADOR</role-name>
+     <role-name>DONO-EMPRESA</role-name>
+</security-role>
+<security-role>
+     <role-name>GERENTE-DE-UNIDADE</role-name>
+</security-role>
+<security-role>
+     <role-name>USUARIO</role-name>
+</security-role>
+<security-role>
+     <role-name>COLABORADOR</role-name>
 </security-role>
     
 </web-app>

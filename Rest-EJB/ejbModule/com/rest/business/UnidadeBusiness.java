@@ -2,6 +2,7 @@ package com.rest.business;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 
 import com.rest.authentication.SecurityContext;
@@ -10,6 +11,7 @@ import com.rest.dao.QueryParameter;
 import com.rest.entitys.Unidade;
 import com.rest.utils.exceptions.BusinessException;
 import com.rest.utils.list.VerificadorLista;
+import com.rest.utils.security.SecurityRoles;
 import com.rest.utils.string.Constantes;
 
 public class UnidadeBusiness extends Business<Unidade> {
@@ -26,6 +28,7 @@ public class UnidadeBusiness extends Business<Unidade> {
 	}
 
 	@Override
+	@RolesAllowed(SecurityRoles.DONO_DE_EMPRESA)
 	public void incluir(Unidade unidade) throws BusinessException {
 		unidade.setEmpresa(securityContext.getUsuarioLogado().getEmpresa());
 		dao.create(unidade);
