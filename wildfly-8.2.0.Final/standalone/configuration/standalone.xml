@@ -316,16 +316,6 @@
         <subsystem xmlns="urn:jboss:domain:sar:1.0"/>
         <subsystem xmlns="urn:jboss:domain:security:1.2">
             <security-domains>
-                <!-- <security-domain name="rulk-security" cache-type="default">
-                    <authentication>
-                        <login-module code="Database" flag="required">
-                            <module-option name="dsJndiName" value="java:jboss/datasources/rulk"/>
-                            <module-option name="principalsQuery" value="select hashSenha from usuario where email=?"/>
-                            <module-option name="rolesQuery" value="select ug.grupo_id, 'Roles' from usuario_grupo ug where ug.usuario_id=?"/>
-                            <module-option name="unauthenticatedIdentity" value="guest"/>
-                        </login-module>
-                    </authentication>
-                </security-domain> -->
                 <security-domain name="other" cache-type="default">
                     <authentication>
                         <login-module code="Database" flag="required">
