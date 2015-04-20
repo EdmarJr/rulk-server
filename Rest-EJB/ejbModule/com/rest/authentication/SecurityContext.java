@@ -32,7 +32,6 @@ public class SecurityContext implements Serializable {
 	@Produces
 	@UsuarioLogado
 	public Usuario getUsuarioLogado() {
-		System.out.println(sessionContext.getCallerPrincipal().getName());
 		if (usuarioLogado == null) {
 			usuarioLogado = crudServiceUsuario.findSingleResultWithNamedQuery(
 					Usuario.OBTER_POR_EMAIL,

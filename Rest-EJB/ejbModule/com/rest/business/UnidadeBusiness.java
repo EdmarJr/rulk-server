@@ -1,5 +1,6 @@
 package com.rest.business;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -19,8 +20,12 @@ import com.rest.utils.string.Constantes;
 
 @Stateless
 @LocalBean
-public class UnidadeBusiness extends Business<Unidade> {
+public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5354644477885362607L;
 	@Inject
 	@UsuarioLogado
 	private Usuario usuarioLogado;

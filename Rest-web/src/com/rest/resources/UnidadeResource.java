@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -18,13 +18,14 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.authentication.SecurityContext;
+import com.rest.authentication.UsuarioLogado;
 import com.rest.business.UnidadeBusiness;
 import com.rest.entitys.Plano;
 import com.rest.entitys.Unidade;
+import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
 
-@ApplicationScoped
+@RequestScoped
 @Path(value = "/secured/unidades")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -33,7 +34,8 @@ public class UnidadeResource extends Resource {
 	private UriInfo uriInfo;
 
 	@Inject
-	private SecurityContext securityContext;
+	@UsuarioLogado
+	private Usuario usuarioLogado;
 
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
@@ -41,7 +43,7 @@ public class UnidadeResource extends Resource {
 	@GET
 	public List<Unidade> obterTodos() {
 		List<Unidade> unidades = new ArrayList<>();
-		unidades.add(securityContext.getUsuarioLogado().getUnidade());
+		unidades.add(usuarioLogado.getUnidade());
 		return unidades;
 	}
 

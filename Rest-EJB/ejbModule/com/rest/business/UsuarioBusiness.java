@@ -6,7 +6,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.rest.authentication.SecurityContext;
+import com.rest.authentication.UsuarioLogado;
 import com.rest.dao.CrudService;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
@@ -18,13 +18,18 @@ public class UsuarioBusiness extends Business<Usuario> implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4259324396558001495L;
+
+	/**
+	 * 
+	 */
 
 	@Inject
 	private CrudService<Usuario> dao;
 
 	@Inject
-	private SecurityContext securityContext;
+	@UsuarioLogado
+	private Usuario usuarioLogado;
 
 	@Override
 	public CrudService<Usuario> getDao() {
@@ -33,7 +38,7 @@ public class UsuarioBusiness extends Business<Usuario> implements Serializable {
 
 	@Override
 	public void incluir(Usuario usuario) throws BusinessException {
-		usuario.setUnidade(securityContext.getUsuarioLogado().getUnidade());
+		usuario.setUnidade(usuarioLogado.getUnidade());
 		dao.create(usuario);
 	}
 

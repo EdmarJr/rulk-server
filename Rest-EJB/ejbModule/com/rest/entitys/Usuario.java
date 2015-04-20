@@ -115,7 +115,6 @@ public abstract class Usuario {
 	public void setHashSenha(String hashSenha) {
 		this.hashSenha = hashSenha;
 	}
-	
 
 	@JsonIgnore
 	public List<String> getTelefones() {
@@ -181,6 +180,7 @@ public abstract class Usuario {
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	@JsonIgnore
 	public List<UsuarioGrupo> getUsuarioGrupos() {
 		return usuarioGrupos;
@@ -189,18 +189,6 @@ public abstract class Usuario {
 	public void setUsuarioGrupos(List<UsuarioGrupo> usuarioGrupos) {
 		this.usuarioGrupos = usuarioGrupos;
 	}
-	
-//	public Boolean seUsuarioIsAdministrador() {
-//		if(this instanceof Colaborador && getUsuarioGrupos().) {
-//			
-//		}
-//
-//	}
-//	
-//	public void sePossuiRole(String nomeRole) {
-//		getUsuarioGrupos();
-//
-//	}
 
 	@Override
 	public int hashCode() {
