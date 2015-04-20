@@ -2,11 +2,11 @@ package com.rest.business;
 
 import java.io.Serializable;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.rest.authentication.SecurityContext;
 import com.rest.dao.CrudService;
 import com.rest.entitys.Cliente;
 import com.rest.entitys.Unidade;
@@ -14,6 +14,7 @@ import com.rest.utils.exceptions.BusinessException;
 import com.rest.utils.exceptions.PlanoNaoDisponivelException;
 import com.rest.utils.exceptions.UnidadeNaoDisponivelException;
 import com.rest.utils.exceptions.UsuarioNaoEColaboradorException;
+import com.rest.utils.security.SecurityRoles;
 
 @Stateless
 @LocalBean
@@ -26,8 +27,6 @@ public class ClienteBusiness extends Business<Cliente> implements Serializable {
 	@Inject
 	private CrudService<Cliente> dao;
 	@Inject
-	private SecurityContext securityContext;
-	@Inject
 	private UnidadeBusiness unidadeBusiness;
 
 	public CrudService<Cliente> getDao() {
@@ -35,6 +34,8 @@ public class ClienteBusiness extends Business<Cliente> implements Serializable {
 	}
 
 	@Override
+	@RolesAllowed({ SecurityRoles.DONO_DE_EMPRESA,
+			SecurityRoles.GERENTE_DE_UNIDADE })
 	public void incluir(Cliente cliente)
 			throws UsuarioNaoEColaboradorException,
 			UnidadeNaoDisponivelException, PlanoNaoDisponivelException,
