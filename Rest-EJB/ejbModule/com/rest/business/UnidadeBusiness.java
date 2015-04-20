@@ -3,22 +3,27 @@ package com.rest.business;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.rest.authentication.SecurityContext;
+import com.rest.authentication.UsuarioLogado;
 import com.rest.dao.CrudService;
 import com.rest.dao.QueryParameter;
 import com.rest.entitys.Unidade;
+import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
 import com.rest.utils.list.VerificadorLista;
 import com.rest.utils.security.SecurityRoles;
 import com.rest.utils.string.Constantes;
 
+@Stateless
+@LocalBean
 public class UnidadeBusiness extends Business<Unidade> {
 
 	@Inject
-	private SecurityContext securityContext;
-
+	@UsuarioLogado
+	private Usuario usuarioLogado;
 	@Inject
 	private CrudService<Unidade> dao;
 
@@ -30,7 +35,7 @@ public class UnidadeBusiness extends Business<Unidade> {
 	@Override
 	@RolesAllowed(SecurityRoles.DONO_DE_EMPRESA)
 	public void incluir(Unidade unidade) throws BusinessException {
-		unidade.setEmpresa(securityContext.getUsuarioLogado().getEmpresa());
+		unidade.setEmpresa(usuarioLogado.getEmpresa());
 		dao.create(unidade);
 	}
 
@@ -41,9 +46,5 @@ public class UnidadeBusiness extends Business<Unidade> {
 		return VerificadorLista.sePossuiUmElemento(retorno) ? retorno.get(0)
 				: null;
 	}
-	
-//	public void validarInclusaoUnidade(Unidade unidade) {
-//		securityContext.getUsuarioLogado().get
-//	}
 
 }

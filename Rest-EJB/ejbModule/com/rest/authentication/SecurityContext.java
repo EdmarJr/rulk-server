@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
 import com.rest.dao.CrudService;
@@ -28,7 +29,10 @@ public class SecurityContext implements Serializable {
 	@Inject
 	private CrudService<Usuario> crudServiceUsuario;
 
+	@Produces
+	@UsuarioLogado
 	public Usuario getUsuarioLogado() {
+		System.out.println(sessionContext.getCallerPrincipal().getName());
 		if (usuarioLogado == null) {
 			usuarioLogado = crudServiceUsuario.findSingleResultWithNamedQuery(
 					Usuario.OBTER_POR_EMAIL,

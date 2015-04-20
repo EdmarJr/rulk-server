@@ -49,13 +49,13 @@ public class UnidadeResource extends Resource {
 	public Response incluir(Unidade unidade) {
 		try {
 			unidadeBusiness.incluir(unidade);
+			URI uri = uriInfo.getAbsolutePathBuilder()
+					.path(unidade.getId().toString()).build();
+			return Response.created(uri).build();
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
-		URI uri = uriInfo.getAbsolutePathBuilder()
-				.path(unidade.getId().toString()).build();
-		return Response.created(uri).build();
 	}
 
 	@GET

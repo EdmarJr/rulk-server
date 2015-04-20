@@ -299,7 +299,7 @@
                             <module-option name="dsJndiName" value="java:jboss/datasources/rulk"/>
                             <module-option name="principalsQuery" value="select hashSenha from usuario where email=?"/>
                             <module-option name="rolesQuery" value="select ug.grupo_id, 'Roles' from usuario_grupo ug where ug.usuario_id=?"/>
-                            <module-option name="unauthenticatedIdentity" value="guest"/>
+                            <module-option name="unauthenticatedIdentity" value="edmarfagunde@gmail.com"/>
                         </login-module>
                     </authentication>
                 </security-domain>
