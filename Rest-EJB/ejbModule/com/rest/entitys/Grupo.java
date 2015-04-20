@@ -7,6 +7,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="grupo")
 public class Grupo {
+	
 	@Id
 	private String nome;
 

@@ -1,0 +1,9 @@
+standalone-full.xml
+standalone-full-ha.xml
+standalone-ha.xml
+standalone_xml_history
+application-roles.properties
+application-users.properties
+logging.properties
+mgmt-groups.properties
+mgmt-users.properties

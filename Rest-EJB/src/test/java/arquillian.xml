@@ -3,7 +3,7 @@
     <!-- <defaultProtocol type="Servlet 3.1"/> -->
     <container qualifier="wildfly-managed" default="true">
         <configuration>
-            <property name="jbossHome">C:\rulk-server\wildfly-8.2.0.Final</property>
+            <property name="jbossHome">C:\rulk-server\wildfly-8.2.0.Final-Test</property>
             <property name="serverConfig">standalone.xml</property>
             <property name="outputToConsole">true</property>
 
