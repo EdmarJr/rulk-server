@@ -1,5 +1,6 @@
 package com.rest.entitys;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -34,7 +35,12 @@ import com.rest.enums.SexoEnum;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", defaultImpl = Cliente.class)
 @JsonSubTypes({ @Type(value = Cliente.class, name = "Cliente"),
 		@Type(value = Colaborador.class, name = "Colaborador") })
-public abstract class Usuario {
+public abstract class Usuario implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8590414821260034395L;
 
 	public static final String OBTER_POR_EMAIL = "obterUsuarioPorEmail";
 

@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.authentication.UsuarioLogado;
+import com.rest.authentication.qualifiers.UsuarioLogado;
 import com.rest.business.UsuarioBusiness;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
@@ -31,7 +31,7 @@ public class UsuarioResource implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7947423924943041089L;
+	private static final long serialVersionUID = 4248090780460593977L;
 	@Inject
 	private UsuarioBusiness usuarioBusiness;
 	@Context

@@ -16,7 +16,7 @@ public abstract class Business<T> {
 		getDao().create(t);
 	}
 
-	public abstract CrudService<T> getDao();
+	public abstract CrudService getDao();
 
 	public T obterPorId(Long id) {
 		Class<T> clazz = obterClassNoContexto();

@@ -1,7 +1,6 @@
 package com.rest.resources;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,15 +17,17 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.authentication.UsuarioLogado;
+import com.rest.authentication.qualifiers.ColaboradorLogado;
+import com.rest.authentication.qualifiers.UsuarioLogado;
 import com.rest.business.UnidadeBusiness;
+import com.rest.entitys.Colaborador;
 import com.rest.entitys.Plano;
 import com.rest.entitys.Unidade;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
 
 @RequestScoped
-@Path(value = "/secured/unidades")
+@Path(value = "/unidades")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UnidadeResource extends Resource {
@@ -36,15 +37,18 @@ public class UnidadeResource extends Resource {
 	@Inject
 	@UsuarioLogado
 	private Usuario usuarioLogado;
+	@Inject
+	@ColaboradorLogado
+	private Colaborador colaboradorLogado;
 
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
 
 	@GET
-	public List<Unidade> obterTodos() {
-		List<Unidade> unidades = new ArrayList<>();
-		unidades.add(usuarioLogado.getUnidade());
-		return unidades;
+	public Response obterUnidadesDisponiveis() {
+		return colaboradorLogado != null ? Response.ok(
+				colaboradorLogado.getUnidadesComPermissoes()).build()
+				: Response.noContent().build();
 	}
 
 	@POST

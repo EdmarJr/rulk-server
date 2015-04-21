@@ -25,11 +25,11 @@ public class ClienteBusiness extends Business<Cliente> implements Serializable {
 	 */
 	private static final long serialVersionUID = 5115945647928612317L;
 	@Inject
-	private CrudService<Cliente> dao;
+	private CrudService dao;
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
 
-	public CrudService<Cliente> getDao() {
+	public CrudService getDao() {
 		return dao;
 	}
 

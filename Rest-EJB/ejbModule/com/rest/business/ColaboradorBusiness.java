@@ -1,8 +1,8 @@
 package com.rest.business;
 
-import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -11,26 +11,23 @@ import com.rest.dao.CrudService;
 import com.rest.dao.QueryParameter;
 import com.rest.entitys.Colaborador;
 import com.rest.utils.list.VerificadorLista;
+import com.rest.utils.security.SecurityRoles;
 import com.rest.utils.string.Constantes;
 
 @Stateless
 @LocalBean
-public class ColaboradorBusiness extends Business<Colaborador> implements
-		Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3914704610637873258L;
+public class ColaboradorBusiness extends Business<Colaborador> {
 
 	@Inject
-	private CrudService<Colaborador> dao;
+	private CrudService dao;
 
 	@Override
-	public CrudService<Colaborador> getDao() {
+	public CrudService getDao() {
 		return dao;
 	}
 
+	@RolesAllowed({ SecurityRoles.DONO_DE_EMPRESA, SecurityRoles.COLABORADOR,
+			SecurityRoles.GERENTE_DE_UNIDADE })
 	public Colaborador obterPorEmailComEagerUnidadesPermitidas(String email) {
 		List<Colaborador> resultado = dao.findWithNamedQuery(
 				Constantes.COLABORADOR_POR_ID_COM_EAGER_UNIDADES_PERMITIDAS,

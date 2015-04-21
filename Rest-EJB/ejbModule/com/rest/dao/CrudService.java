@@ -8,13 +8,16 @@ import java.util.Map.Entry;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless
 @LocalBean
-public class CrudService<T> implements Serializable {
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
+public class CrudService implements Serializable {
 
 	/**
 	 * 
@@ -24,55 +27,55 @@ public class CrudService<T> implements Serializable {
 	@PersistenceContext
 	private EntityManager em;
 
-	public T create(T t) {
+	public <T> T create(T t) {
 		this.em.persist(t);
 		this.em.flush();
 		this.em.refresh(t);
 		return t;
 	}
 
-	public T find(Class<T> type, Object id) {
+	public <T> T find(Class type, Object id) {
 		return (T) this.em.find(type, id);
 	}
 
-	public void delete(Class<T> type, Object id) {
+	public <T> void delete(Class<T> type, Object id) {
 		Object ref = this.em.getReference(type, id);
 		this.em.remove(ref);
 	}
 
-	public T update(T t) {
+	public <T> T update(T t) {
 		return (T) this.em.merge(t);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> findWithNamedQuery(String namedQueryName) {
+	public <T> List<T> findWithNamedQuery(String namedQueryName) {
 		return this.em.createNamedQuery(namedQueryName).getResultList();
 	}
 
-	public List<T> findWithNamedQuery(String namedQueryName,
+	public <T> List<T> findWithNamedQuery(String namedQueryName,
 			Map<String, Object> parameters) {
 		return findWithNamedQuery(namedQueryName, parameters, 0);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> findWithNamedQuery(String queryName, int resultLimit) {
+	public <T> List<T> findWithNamedQuery(String queryName, int resultLimit) {
 		return this.em.createNamedQuery(queryName).setMaxResults(resultLimit)
 				.getResultList();
 	}
 
-	public T findSingleResultWithNamedQuery(String queryName,
+	public <T> T findSingleResultWithNamedQuery(String queryName,
 			Map<String, Object> parameters) {
 		List<T> resultList = findWithNamedQuery(queryName, parameters);
 		return resultList.size() > 0 ? resultList.get(0) : null;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> findByNativeQuery(String sql, Class<T> type) {
+	public <T> List<T> findByNativeQuery(String sql, Class<T> type) {
 		return this.em.createNativeQuery(sql, type).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> findWithNamedQuery(String namedQueryName,
+	public <T> List<T> findWithNamedQuery(String namedQueryName,
 			Map<String, Object> parameters, int resultLimit) {
 		Query query = this.em.createNamedQuery(namedQueryName);
 		if (resultLimit > 0)
@@ -90,7 +93,7 @@ public class CrudService<T> implements Serializable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> obterTodos(Class<T> clazz) {
+	public <T> List<T> obterTodos(Class<T> clazz) {
 		Query query = em.createQuery("SELECT t FROM " + clazz.getName() + " t");
 		return query.getResultList();
 	}

@@ -18,9 +18,9 @@ public class CompanyBusiness extends Business<Company> implements Serializable {
 	 */
 	private static final long serialVersionUID = 8025076701204516529L;
 	@Inject
-	private CrudService<Company> dao;
+	private CrudService dao;
 
-	public CrudService<Company> getDao() {
+	public CrudService getDao() {
 		return dao;
 	}
 

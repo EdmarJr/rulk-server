@@ -6,6 +6,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.rest.dao.QueryParameter;
+import com.rest.entitys.Usuario;
+
 @ApplicationScoped
 @Path("/planos")
 @Produces(MediaType.APPLICATION_JSON)
@@ -15,4 +18,5 @@ public class PlanoResource {
 	public void obterTodos() {
 
 	}
+
 }

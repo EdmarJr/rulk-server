@@ -16,10 +16,28 @@
      <display-name>Constraint-0</display-name>
      <web-resource-collection>
          <web-resource-name>Constraint-0</web-resource-name>
-         <url-pattern>/secured/*</url-pattern>
+         <url-pattern>/unidades</url-pattern>
+         <http-method>GET</http-method>
      </web-resource-collection>
      <auth-constraint>
-         <role-name>*</role-name>
+         <role-name>DONO-EMPRESA</role-name>
+         <role-name>GERENTE-DE-UNIDADE</role-name>
+         <role-name>COLABORADOR</role-name>
+     </auth-constraint>
+     <user-data-constraint>
+         <transport-guarantee>NONE</transport-guarantee>
+     </user-data-constraint>
+</security-constraint>
+
+  <security-constraint>
+     <display-name>Constraint-0</display-name>
+     <web-resource-collection>
+         <web-resource-name>Constraint-0</web-resource-name>
+         <url-pattern>/unidades</url-pattern>
+         <http-method>POST</http-method>
+     </web-resource-collection>
+     <auth-constraint>
+         <role-name>DONO-EMPRESA</role-name>
      </auth-constraint>
      <user-data-constraint>
          <transport-guarantee>NONE</transport-guarantee>

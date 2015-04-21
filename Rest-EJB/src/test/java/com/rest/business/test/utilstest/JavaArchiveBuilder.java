@@ -4,7 +4,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 
-import com.rest.authentication.SecurityContext;
+import com.rest.authentication.SecurityContextRulk;
 import com.rest.business.Business;
 import com.rest.dao.CrudService;
 import com.rest.dao.QueryParameter;
@@ -60,7 +60,7 @@ public class JavaArchiveBuilder {
 	}
 
 	public JavaArchiveBuilder carregarSeguranca() {
-		ja = ja.addClass(SecurityContext.class);
+		ja = ja.addClass(SecurityContextRulk.class);
 		this.carregarPersistencia();
 		return this.carregarEntidades();
 	}

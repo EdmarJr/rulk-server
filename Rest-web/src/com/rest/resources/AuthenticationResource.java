@@ -3,6 +3,7 @@ package com.rest.resources;
 import java.util.Date;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,11 +13,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.rest.authentication.SecurityContextRulk;
+import com.rest.business.UsuarioBusiness;
+
 @ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/")
 public class AuthenticationResource extends Resource {
+
+	@Inject
+	private SecurityContextRulk securityContextRulk;
+	@Inject
+	private UsuarioBusiness usuarioBusiness;
 
 	@POST
 	@Path("login")
@@ -25,6 +34,8 @@ public class AuthenticationResource extends Resource {
 			httpServletRequest.login(usuario.getEmail(), usuario.getSenha());
 			logger.info("O usuário " + usuario.getEmail()
 					+ " se autenticou no instante " + new Date());
+			securityContextRulk.definirUsuarioLogado(usuarioBusiness
+					.obterPorEmail(usuario.getEmail()));
 			return Response.ok().build();
 		} catch (ServletException e) {
 			logger.info("Usuário tentou se logar com o email: "

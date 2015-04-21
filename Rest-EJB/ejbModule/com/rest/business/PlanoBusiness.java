@@ -22,10 +22,10 @@ public class PlanoBusiness extends Business<Plano> implements Serializable {
 	 */
 	private static final long serialVersionUID = 3188320421516497391L;
 	@Inject
-	private CrudService<Plano> dao;
+	private CrudService dao;
 
 	@Override
-	public CrudService<Plano> getDao() {
+	public CrudService getDao() {
 		return dao;
 	}
 

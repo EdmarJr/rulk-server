@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
 import com.rest.utils.string.Constantes;
@@ -24,6 +26,10 @@ import com.rest.utils.string.Constantes;
 @EntityListeners(AtivoInativoListener.class)
 @NamedQueries(@NamedQuery(name = Constantes.COLABORADOR_POR_ID_COM_EAGER_UNIDADES_PERMITIDAS, query = "SELECT c from Colaborador c LEFT JOIN FETCH c.unidadesComPermissoes where c.email = :email"))
 public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4928994378186406678L;
 	@Column(name = "dataInicio")
 	private LocalDate dataInicio;
 	@Column(name = "dataFim")
@@ -57,7 +63,7 @@ public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
 	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
 	}
-
+	@JsonIgnore
 	public List<Unidade> getUnidadesComPermissoes() {
 		return unidadesComPermissoes;
 	}
