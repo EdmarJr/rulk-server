@@ -14,15 +14,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+@SuppressWarnings("serial")
 @Stateless
 @LocalBean
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class CrudService implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7255213568098350137L;
 
 	@PersistenceContext
 	private EntityManager em;

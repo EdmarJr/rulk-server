@@ -18,14 +18,11 @@ import com.rest.utils.list.VerificadorLista;
 import com.rest.utils.security.SecurityRoles;
 import com.rest.utils.string.Constantes;
 
+@SuppressWarnings("serial")
 @Stateless
 @LocalBean
 public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5354644477885362607L;
 	@UsuarioLogado
 	private Usuario usuarioLogado;
 	@Inject

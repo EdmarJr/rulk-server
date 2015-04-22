@@ -2,7 +2,7 @@ package com.rest.resources;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -14,25 +14,20 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
-
 import com.rest.business.ClienteBusiness;
 import com.rest.entitys.Cliente;
 import com.rest.utils.exceptions.BusinessException;
 import com.rest.utils.exceptions.SecurityException;
 
-@ApplicationScoped
+@SuppressWarnings("serial")
+@RequestScoped
 @Path("/clientes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ClienteResource implements Serializable {
 
-
 	@Context
 	private UriInfo uriInfo;
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private ClienteBusiness business;
