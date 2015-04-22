@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import com.rest.authentication.SecurityContextRulk;
 import com.rest.business.UsuarioBusiness;
+import com.rest.utils.ConstantesResource;
 
 @ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
@@ -41,7 +42,10 @@ public class AuthenticationResource extends Resource {
 			logger.info("Usuário tentou se logar com o email: "
 					+ usuario.getEmail() + " no instante " + new Date()
 					+ " e não obteve sucesso");
-			return Response.status(404).build();
+			return Response
+					.status(404)
+					.header(ConstantesResource.MSG_ERRO_HEADER,
+							"Usuario ou senha estão errados").build();
 		}
 	}
 
