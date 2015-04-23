@@ -23,6 +23,7 @@ import com.rest.utils.string.Constantes;
 @LocalBean
 public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 
+	@Inject
 	@UsuarioLogado
 	private Usuario usuarioLogado;
 	@Inject

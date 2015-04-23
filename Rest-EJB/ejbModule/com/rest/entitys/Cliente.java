@@ -13,11 +13,12 @@ import javax.persistence.Table;
 
 import com.rest.enums.PeriodoPagamentoEnum;
 
+@SuppressWarnings("serial")
 @Entity
-@Table(name="cliente")
+@Table(name = "cliente")
 @PrimaryKeyJoinColumn(name = "email", referencedColumnName = "email")
 public class Cliente extends Usuario {
-	
+
 	public Cliente() {
 		// TODO Auto-generated constructor stub
 	}
@@ -30,7 +31,7 @@ public class Cliente extends Usuario {
 	@JoinColumn(name = "plano_id", referencedColumnName = "id")
 	private Plano plano;
 
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy = "cliente")
 	private List<Desconto> descontos;
 
 	@Enumerated(EnumType.STRING)
@@ -59,9 +60,5 @@ public class Cliente extends Usuario {
 	public void setTipoPagamento(PeriodoPagamentoEnum tipoPagamento) {
 		this.tipoPagamento = tipoPagamento;
 	}
-	
-	
-	
-	
 
 }

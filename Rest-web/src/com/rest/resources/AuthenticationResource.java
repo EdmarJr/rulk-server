@@ -2,7 +2,7 @@ package com.rest.resources;
 
 import java.util.Date;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.ws.rs.Consumes;
@@ -17,7 +17,7 @@ import com.rest.authentication.SecurityContextRulk;
 import com.rest.business.UsuarioBusiness;
 import com.rest.utils.ConstantesResource;
 
-@ApplicationScoped
+@RequestScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/")
