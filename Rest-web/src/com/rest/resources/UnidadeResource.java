@@ -19,6 +19,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.rest.authentication.qualifiers.ColaboradorLogado;
 import com.rest.authentication.qualifiers.UsuarioLogado;
+import com.rest.business.ColaboradorBusiness;
 import com.rest.business.UnidadeBusiness;
 import com.rest.entitys.Colaborador;
 import com.rest.entitys.Plano;
@@ -44,11 +45,19 @@ public class UnidadeResource extends Resource {
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
 
+	@Inject
+	private ColaboradorBusiness colaboradorBusiness;
+
 	@GET
 	public Response obterUnidadesDisponiveis() {
-		return colaboradorLogado != null ? Response.ok(
-				colaboradorLogado.getUnidadesComPermissoes()).build()
-				: Response.noContent().build();
+		if (colaboradorLogado != null) {
+			return Response.ok(
+					colaboradorBusiness
+							.obterPorEmailComEagerUnidadesPermitidas(
+									colaboradorLogado.getEmail())
+							.getUnidadesComPermissoes()).build();
+		}
+		return Response.noContent().build();
 	}
 
 	@POST

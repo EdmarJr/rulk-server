@@ -22,16 +22,13 @@ import com.rest.business.UsuarioBusiness;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
 
+@SuppressWarnings("serial")
 @RequestScoped
 @Path("/usuarios")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class UsuarioResource implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4248090780460593977L;
 	@Inject
 	private UsuarioBusiness usuarioBusiness;
 	@Context

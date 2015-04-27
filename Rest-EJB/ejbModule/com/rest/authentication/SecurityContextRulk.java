@@ -4,11 +4,9 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 
 import com.rest.authentication.qualifiers.ColaboradorLogado;
 import com.rest.authentication.qualifiers.UsuarioLogado;
-import com.rest.business.ColaboradorBusiness;
 import com.rest.entitys.Colaborador;
 import com.rest.entitys.Usuario;
 
@@ -22,9 +20,6 @@ public class SecurityContextRulk implements Serializable {
 
 	private Usuario usuarioLogado;
 	private Colaborador colaboradorLogado;
-
-	@Inject
-	private ColaboradorBusiness colaboradorBusiness;
 
 	@Produces
 	@UsuarioLogado
@@ -40,8 +35,7 @@ public class SecurityContextRulk implements Serializable {
 
 	public void definirUsuarioLogado(Usuario usuario) {
 		if (usuario != null && usuario instanceof Colaborador) {
-			colaboradorLogado = (Colaborador) colaboradorBusiness
-					.obterPorEmailComEagerUnidadesPermitidas(usuario.getEmail());
+			colaboradorLogado = (Colaborador) usuario;
 			usuarioLogado = colaboradorLogado;
 			return;
 		}

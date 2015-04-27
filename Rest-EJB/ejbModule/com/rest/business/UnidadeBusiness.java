@@ -17,7 +17,6 @@ import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
 import com.rest.utils.list.VerificadorLista;
 import com.rest.utils.security.SecurityRoles;
-import com.rest.utils.string.Constantes;
 
 @SuppressWarnings("serial")
 @Stateless
@@ -46,8 +45,8 @@ public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 			SecurityRoles.GERENTE_DE_UNIDADE })
 	public Unidade obterPorIdComEagerPlanos(Long id) {
 		List<Unidade> retorno = dao.findWithNamedQuery(
-				Constantes.UNIDADE_POR_ID_COM_EAGER_PLANOS, QueryParameter
-						.with("id", id).parameters());
+				Unidade.UNIDADE_POR_ID_COM_EAGER_PLANOS,
+				QueryParameter.with("id", id).parameters());
 		return VerificadorLista.sePossuiUmElemento(retorno) ? retorno.get(0)
 				: null;
 	}
