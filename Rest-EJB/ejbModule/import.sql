@@ -14,3 +14,4 @@ insert into grupo values ('GERENTE-DE-UNIDADE');
 insert into grupo values ('USUARIO');
 insert into grupo values ('COLABORADOR');
 insert into usuario_grupo values ('DONO-EMPRESA','edmarfagunde@gmail.com');
+update unidade set responsavel_id ='edmarfagunde@gmail.com';
