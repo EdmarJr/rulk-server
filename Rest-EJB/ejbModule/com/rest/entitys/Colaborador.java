@@ -63,6 +63,7 @@ public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
 	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
 	}
+
 	@JsonIgnore
 	public List<Unidade> getUnidadesComPermissoes() {
 		return unidadesComPermissoes;

@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonSubTypes.Type;
@@ -63,6 +64,7 @@ public abstract class Usuario implements Serializable {
 	private List<String> telefones;
 	@ManyToOne
 	@JoinColumn(name = "unidade_id", referencedColumnName = "id")
+	@JsonBackReference
 	private Unidade unidade;
 	@Transient
 	private String password;

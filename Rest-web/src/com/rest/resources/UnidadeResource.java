@@ -70,4 +70,11 @@ public class UnidadeResource extends Resource {
 		return unidadeBusiness.obterPorIdComEagerPlanos(id).getPlanos();
 	}
 
+	@GET
+	@Path("/{id}")
+	public Response obterPorId(@PathParam("id") Long id) {
+		return Response.ok(unidadeBusiness.obterPorId(id)).build();
+
+	}
+
 }

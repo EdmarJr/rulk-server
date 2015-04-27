@@ -3,6 +3,7 @@ package com.rest.business;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -49,6 +50,12 @@ public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 						.with("id", id).parameters());
 		return VerificadorLista.sePossuiUmElemento(retorno) ? retorno.get(0)
 				: null;
+	}
+
+	@PermitAll
+	public Unidade obterPorId(Long id) {
+		// TODO Auto-generated method stub
+		return super.obterPorId(id);
 	}
 
 }

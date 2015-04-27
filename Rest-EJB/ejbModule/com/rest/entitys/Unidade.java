@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
@@ -40,6 +41,7 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	private Company empresa;
 	@OneToOne
 	@JoinColumn(name = "responsavel_id", referencedColumnName = "email")
+	@JsonManagedReference
 	private Colaborador responsavel;
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -119,12 +121,12 @@ public class Unidade implements ObjetoComExclusaoLogica {
 
 	public Boolean sePossuiPlano(Plano plano) {
 		List<Plano> planos = getPlanos();
-		for(Plano p : planos) {
+		for (Plano p : planos) {
 			if (p.equals(plano))
 				return Boolean.TRUE;
 		}
 		return Boolean.FALSE;
- 	}
+	}
 
 	@Override
 	public int hashCode() {
