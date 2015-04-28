@@ -1,16 +1,15 @@
 package com.rest.entitys;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -36,9 +35,15 @@ public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
 	private LocalDate dataFim;
 	@Column(name = "ativo")
 	private Boolean ativo;
-	@ManyToMany
-	@JoinTable(name = "colaborador_has_permission_in_unidades", joinColumns = @JoinColumn(name = "unidade_id", referencedColumnName = "email"), inverseJoinColumns = @JoinColumn(name = "colaborador_id", referencedColumnName = "id"))
-	private List<Unidade> unidadesComPermissoes;
+	@OneToMany(mappedBy = "colaborador")
+	private List<ColaboradorComPermissaoUnidade> unidadesComPermissoes;
+
+	@JsonIgnore
+	public List<Unidade> getUnidadesComPermissoesParaOColaborador() {
+		ArrayList<Unidade> unidades = new ArrayList<Unidade>();
+		unidadesComPermissoes.forEach((u) -> unidades.add(u.getUnidade()));
+		return unidades;
+	}
 
 	public Boolean getAtivo() {
 		return ativo;
@@ -65,21 +70,23 @@ public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
 	}
 
 	@JsonIgnore
-	public List<Unidade> getUnidadesComPermissoes() {
-		return unidadesComPermissoes;
-	}
-
-	public void setUnidadesComPermissoes(List<Unidade> unidadesComPermissoes) {
-		this.unidadesComPermissoes = unidadesComPermissoes;
-	}
-
 	public Boolean sePossuiPermissaoEmUnidade(Unidade unidade) {
-		List<Unidade> unidades = getUnidadesComPermissoes();
-		for (Unidade u : unidades) {
-			if (unidade.equals(u))
+		List<ColaboradorComPermissaoUnidade> unidades = getUnidadesComPermissoes();
+		for (ColaboradorComPermissaoUnidade u : unidades) {
+			if (unidade.equals(u.getUnidade()))
 				return Boolean.TRUE;
 		}
 		return Boolean.FALSE;
+	}
+
+	@JsonIgnore
+	public List<ColaboradorComPermissaoUnidade> getUnidadesComPermissoes() {
+		return unidadesComPermissoes;
+	}
+
+	public void setUnidadesComPermissoes(
+			List<ColaboradorComPermissaoUnidade> unidadesComPermissoes) {
+		this.unidadesComPermissoes = unidadesComPermissoes;
 	}
 
 }

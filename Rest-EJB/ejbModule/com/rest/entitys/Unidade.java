@@ -1,9 +1,7 @@
 package com.rest.entitys;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -11,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,10 +28,6 @@ import com.rest.entitys.listeners.AtivoInativoListener;
 @EntityListeners(AtivoInativoListener.class)
 @NamedQueries({ @NamedQuery(name = Unidade.UNIDADE_POR_ID_COM_EAGER_PLANOS, query = "SELECT u from Unidade u JOIN FETCH u.planos WHERE u.id = :id ") })
 public class Unidade implements ObjetoComExclusaoLogica {
-
-	public Unidade() {
-		setColaboradoresComPermissao(new ArrayList<Colaborador>());
-	}
 
 	public static final String UNIDADE_POR_ID_COM_EAGER_PLANOS = "buscarUnidadePorIdComJoinPlanos";
 	@Id
@@ -59,8 +52,6 @@ public class Unidade implements ObjetoComExclusaoLogica {
 	private List<Aparelho> aparelhos;
 	@OneToMany(mappedBy = "unidade")
 	private List<Plano> planos;
-	@ManyToMany(mappedBy = "unidadesComPermissoes", cascade = CascadeType.ALL)
-	private List<Colaborador> colaboradoresComPermissao;
 
 	public Long getId() {
 		return id;
@@ -136,16 +127,6 @@ public class Unidade implements ObjetoComExclusaoLogica {
 				return Boolean.TRUE;
 		}
 		return Boolean.FALSE;
-	}
-
-	@JsonIgnore
-	public List<Colaborador> getColaboradoresComPermissao() {
-		return colaboradoresComPermissao;
-	}
-
-	public void setColaboradoresComPermissao(
-			List<Colaborador> colaboradoresComPermissao) {
-		this.colaboradoresComPermissao = colaboradoresComPermissao;
 	}
 
 	@Override
