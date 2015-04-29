@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import com.rest.authentication.qualifiers.UsuarioLogado;
 import com.rest.dao.CrudService;
 import com.rest.dao.QueryParameter;
+import com.rest.entitys.Colaborador;
+import com.rest.entitys.ColaboradorComPermissaoUnidade;
 import com.rest.entitys.Unidade;
 import com.rest.entitys.Usuario;
 import com.rest.utils.exceptions.BusinessException;
@@ -27,7 +29,11 @@ public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 	@UsuarioLogado
 	private Usuario usuarioLogado;
 	@Inject
+	private ColaboradorComPermissaoUnidadeBusiness colaboradorComPermissaoUnidadeBusiness;
+	@Inject
 	private CrudService dao;
+	@Inject
+	private ColaboradorBusiness colaboradorBusiness;
 
 	@Override
 	public CrudService getDao() {
@@ -37,8 +43,14 @@ public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 	@Override
 	@RolesAllowed({ SecurityRoles.DONO_DE_EMPRESA })
 	public void incluir(Unidade unidade) throws BusinessException {
-		unidade.setEmpresa(usuarioLogado.getEmpresa());
+		Colaborador colaboradorLogado = colaboradorBusiness
+				.obterColaboradorLogado();
 		dao.create(unidade);
+		if (colaboradorLogado != null) {
+			colaboradorComPermissaoUnidadeBusiness
+					.incluir(new ColaboradorComPermissaoUnidade(
+							colaboradorLogado, unidade));
+		}
 	}
 
 	@RolesAllowed({ SecurityRoles.COLABORADOR, SecurityRoles.DONO_DE_EMPRESA,
