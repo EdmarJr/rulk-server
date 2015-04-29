@@ -20,10 +20,8 @@ import javax.ws.rs.core.UriInfo;
 import com.rest.authentication.qualifiers.ColaboradorLogado;
 import com.rest.authentication.qualifiers.UsuarioLogado;
 import com.rest.business.ColaboradorBusiness;
-import com.rest.business.ColaboradorComPermissaoUnidadeBusiness;
 import com.rest.business.UnidadeBusiness;
 import com.rest.entitys.Colaborador;
-import com.rest.entitys.ColaboradorComPermissaoUnidade;
 import com.rest.entitys.Plano;
 import com.rest.entitys.Unidade;
 import com.rest.entitys.Usuario;
@@ -46,8 +44,6 @@ public class UnidadeResource extends Resource {
 
 	@Inject
 	private UnidadeBusiness unidadeBusiness;
-	@Inject
-	private ColaboradorComPermissaoUnidadeBusiness colaboradorComPermissaoUnidadeBusiness;
 
 	@Inject
 	private ColaboradorBusiness colaboradorBusiness;
@@ -69,9 +65,6 @@ public class UnidadeResource extends Resource {
 	public Response incluir(Unidade unidade) {
 		try {
 			unidadeBusiness.incluir(unidade);
-			colaboradorComPermissaoUnidadeBusiness
-					.incluir(new ColaboradorComPermissaoUnidade(
-							colaboradorLogado, unidade));
 			URI uri = uriInfo.getAbsolutePathBuilder()
 					.path(unidade.getId().toString()).build();
 			return Response.created(uri).build();

@@ -3,7 +3,7 @@ package com.rest.business;
 import java.util.List;
 
 import com.rest.dao.CrudService;
-import com.rest.entitys.Unidade;
+import com.rest.entitys.Colaborador;
 import com.rest.utils.exceptions.BusinessException;
 
 public abstract class Business<T> {
@@ -30,6 +30,6 @@ public abstract class Business<T> {
 
 	@SuppressWarnings("unchecked")
 	private Class<T> obterClassNoContexto() {
-		return (Class<T>) Unidade.class;
+		return (Class<T>) Colaborador.class;
 	}
 }
