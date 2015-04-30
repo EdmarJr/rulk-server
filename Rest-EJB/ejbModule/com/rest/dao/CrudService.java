@@ -30,7 +30,7 @@ public class CrudService implements Serializable {
 		return t;
 	}
 
-	public <T> T find(Class type, Object id) {
+	public <T> T find(Class<T> type, Object id) {
 		return (T) this.em.find(type, id);
 	}
 

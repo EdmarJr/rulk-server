@@ -1,13 +1,14 @@
 package com.rest.resources;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -25,6 +26,7 @@ import com.rest.entitys.Colaborador;
 import com.rest.entitys.Plano;
 import com.rest.entitys.Unidade;
 import com.rest.entitys.Usuario;
+import com.rest.utils.ResourceUtils;
 import com.rest.utils.exceptions.BusinessException;
 
 @RequestScoped
@@ -61,16 +63,39 @@ public class UnidadeResource extends Resource {
 		return Response.noContent().build();
 	}
 
+	interface AcaoSalvar {
+		void salvar(Unidade unidade) throws BusinessException;
+	}
+
+	@PUT
 	@POST
-	public Response incluir(Unidade unidade) {
+	public Response salvar(Unidade unidade) {
+		return unidade.getId() == null ? salvar(unidade,
+				(u) -> unidadeBusiness.incluir(u)) : salvar(unidade,
+				(u) -> unidadeBusiness.alterar(u));
+	}
+
+	private Response salvar(Unidade unidade, AcaoSalvar acao) {
 		try {
-			unidadeBusiness.incluir(unidade);
-			URI uri = uriInfo.getAbsolutePathBuilder()
-					.path(unidade.getId().toString()).build();
-			return Response.created(uri).build();
+			acao.salvar(unidade);
+			return Response
+					.created(
+							ResourceUtils.obterUri(uriInfo, unidade.getId()
+									.toString())).entity(unidade).build();
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+
+	@DELETE
+	public Response excluir(Unidade unidade) {
+		try {
+			unidadeBusiness.excluir(unidade);
+			return Response.ok().build();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			return Response.serverError().build();
 		}
 	}
 
@@ -83,7 +108,7 @@ public class UnidadeResource extends Resource {
 	@GET
 	@Path("/{id}")
 	public Response obterPorId(@PathParam("id") Long id) {
-		return Response.ok(unidadeBusiness.obterPorId(id)).build();
+		return Response.ok().entity(unidadeBusiness.obterPorId(id)).build();
 
 	}
 

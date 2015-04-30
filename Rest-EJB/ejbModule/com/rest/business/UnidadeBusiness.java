@@ -46,6 +46,7 @@ public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 		Colaborador colaboradorLogado = colaboradorBusiness
 				.obterColaboradorLogado();
 		dao.create(unidade);
+		unidade.setResponsavel(colaboradorLogado);
 		if (colaboradorLogado != null) {
 			colaboradorComPermissaoUnidadeBusiness
 					.incluir(new ColaboradorComPermissaoUnidade(
@@ -63,10 +64,15 @@ public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 				: null;
 	}
 
+	public void excluir(Unidade unidade) throws BusinessException {
+		unidade = obterPorId(unidade.getId());
+		unidade.setAtivo(Boolean.FALSE);
+		dao.update(unidade);
+	}
+
 	@PermitAll
 	public Unidade obterPorId(Long id) {
-		// TODO Auto-generated method stub
-		return super.obterPorId(id);
+		return super.obterPorId(Unidade.class, id);
 	}
 
 }

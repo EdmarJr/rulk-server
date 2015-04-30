@@ -43,7 +43,7 @@ public class ColaboradorBusiness extends Business<Colaborador> {
 
 	@PermitAll
 	public Colaborador obterColaboradorLogado() {
-		return obterPorId(colaboradorLogado.getEmail());
+		return obterPorId(Colaborador.class, colaboradorLogado.getEmail());
 	}
 
 }

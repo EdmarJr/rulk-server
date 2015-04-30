@@ -19,6 +19,9 @@ import javax.validation.constraints.NotNull;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 
 import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
@@ -27,6 +30,8 @@ import com.rest.entitys.listeners.AtivoInativoListener;
 @Table(name = "unidade")
 @EntityListeners(AtivoInativoListener.class)
 @NamedQueries({ @NamedQuery(name = Unidade.UNIDADE_POR_ID_COM_EAGER_PLANOS, query = "SELECT u from Unidade u JOIN FETCH u.planos WHERE u.id = :id ") })
+@FilterDef(name = "somenteAtivos", parameters = @ParamDef(name = "ativo", type = "java.lang.Boolean"))
+@Filter(name = "somenteAtivos", condition = ":ativo = ativo")
 public class Unidade implements ObjetoComExclusaoLogica {
 
 	public static final String UNIDADE_POR_ID_COM_EAGER_PLANOS = "buscarUnidadePorIdComJoinPlanos";

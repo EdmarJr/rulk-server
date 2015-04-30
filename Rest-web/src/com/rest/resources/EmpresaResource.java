@@ -36,7 +36,7 @@ public class EmpresaResource {
 	@GET
 	@PermitAll
 	public List<Company> obterUsuarios() {
-		return business.obterTodos();
+		return business.obterTodos(Company.class);
 	}
 
 	@GET

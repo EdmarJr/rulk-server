@@ -39,13 +39,13 @@ public class UsuarioResource implements Serializable {
 
 	@GET
 	public List<Usuario> obterUsuarios() {
-		return usuarioBusiness.obterTodos();
+		return usuarioBusiness.obterTodos(Usuario.class);
 	}
 
 	@GET
 	@Path("/{id}")
 	public Usuario obterUsuarioMock(@PathParam("id") Long id) {
-		return usuarioBusiness.obterPorId(id);
+		return usuarioBusiness.obterPorId(Usuario.class, id);
 	}
 
 	@POST
