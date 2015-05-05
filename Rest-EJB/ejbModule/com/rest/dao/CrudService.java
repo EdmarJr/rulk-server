@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -13,6 +14,9 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import org.hibernate.Filter;
+import org.hibernate.Session;
 
 @SuppressWarnings("serial")
 @Stateless
@@ -22,6 +26,13 @@ public class CrudService implements Serializable {
 
 	@PersistenceContext
 	private EntityManager em;
+
+	@PostConstruct
+	public void init() {
+		Session session = (Session) em.getDelegate();
+		Filter filter = session.enableFilter("somenteAtivos");
+		filter.setParameter("ativo", Boolean.TRUE);
+	}
 
 	public <T> T create(T t) {
 		this.em.persist(t);

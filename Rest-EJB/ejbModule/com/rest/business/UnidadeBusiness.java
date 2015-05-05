@@ -23,7 +23,7 @@ import com.rest.utils.security.SecurityRoles;
 @SuppressWarnings("serial")
 @Stateless
 @LocalBean
-public class UnidadeBusiness extends Business<Unidade> implements Serializable {
+public class UnidadeBusiness implements Serializable {
 
 	@Inject
 	@UsuarioLogado
@@ -35,12 +35,10 @@ public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 	@Inject
 	private ColaboradorBusiness colaboradorBusiness;
 
-	@Override
 	public CrudService getDao() {
 		return dao;
 	}
 
-	@Override
 	@RolesAllowed({ SecurityRoles.DONO_DE_EMPRESA })
 	public void incluir(Unidade unidade) throws BusinessException {
 		Colaborador colaboradorLogado = colaboradorBusiness
@@ -72,7 +70,16 @@ public class UnidadeBusiness extends Business<Unidade> implements Serializable {
 
 	@PermitAll
 	public Unidade obterPorId(Long id) {
-		return super.obterPorId(Unidade.class, id);
+		return null;
+	}
+
+	public void alterar(Unidade unidade) throws BusinessException {
+		getDao().create(unidade);
+	}
+
+	public List<Unidade> obterTodos(Class<Unidade> unidade) {
+		return getDao().obterTodos(unidade);
+
 	}
 
 }

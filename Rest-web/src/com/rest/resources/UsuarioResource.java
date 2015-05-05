@@ -45,7 +45,7 @@ public class UsuarioResource implements Serializable {
 	@GET
 	@Path("/{id}")
 	public Usuario obterUsuarioMock(@PathParam("id") Long id) {
-		return usuarioBusiness.obterPorId(Usuario.class, id);
+		return usuarioBusiness.obterPorId(id);
 	}
 
 	@POST

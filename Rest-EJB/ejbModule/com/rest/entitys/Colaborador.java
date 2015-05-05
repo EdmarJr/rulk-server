@@ -14,6 +14,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Filter;
 
 import com.rest.entitys.interfaces.ObjetoComExclusaoLogica;
 import com.rest.entitys.listeners.AtivoInativoListener;
@@ -36,6 +37,7 @@ public class Colaborador extends Usuario implements ObjetoComExclusaoLogica {
 	@Column(name = "ativo")
 	private Boolean ativo;
 	@OneToMany(mappedBy = "colaborador")
+	@Filter(name = "somenteAtivos", condition = ":ativo = ativo")
 	private List<ColaboradorComPermissaoUnidade> unidadesComPermissoes;
 
 	@JsonIgnore
